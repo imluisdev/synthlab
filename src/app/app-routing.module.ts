@@ -1,7 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: '',
+    component: NavbarComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
+        pathMatch: 'full'
+      },
+      {
+        path: 'registrar',
+        loadChildren: () => import('./features/registrar/registrar.module').then(m => m.RegistrarModule)
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
