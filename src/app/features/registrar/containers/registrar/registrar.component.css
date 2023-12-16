@@ -1,0 +1,22 @@
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+  
+.input-icon {
+    position: absolute;
+    top: 66%;
+    font-size: 20px;
+    right: 20px; /* Adjust the right distance as needed */
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.registrar-icono {
+    font-size: 34px;
+}
+
+.debug {
+    border: 1px solid red;
+}

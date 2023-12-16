@@ -11,3 +11,48 @@
         @apply text-slate-50 block w-max py-4 px-12 rounded-full;
     }
 }
+
+.custom-font-100 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+}
+
+.custom-font-200 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+}
+
+.custom-font-300 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+.custom-font-300:not(:placeholder-shown) {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.custom-font-400 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.custom-font-500 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.custom-font-600 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.custom-font-700 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.custom-font-800 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+}

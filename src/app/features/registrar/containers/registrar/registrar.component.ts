@@ -18,6 +18,7 @@ export class RegistrarComponent implements OnInit {
 
   public registrarUsuarioGroup: FormGroup<IRegistrarUsuarioGroup>;
   public loading: boolean;
+  public hiddenPassword: boolean = true;
 
   ngOnInit() {
     this.armarFormularioRegistro();
@@ -28,8 +29,8 @@ export class RegistrarComponent implements OnInit {
       nombre: ['', Validators.required],
       apellido_paterno: ['', Validators.required],
       apellido_materno: ['', Validators.required],
-      correo_electronico: ['', Validators.required],
-      contrasena: ['', Validators.required],
+      correo_electronico: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required, Validators.minLength(8)]],
       fecha_nacimiento: ['', Validators.required],
     });
   }
@@ -44,16 +45,21 @@ export class RegistrarComponent implements OnInit {
         contrasena: this.registrarUsuarioGroup.controls['contrasena'].value,
         fecha_nacimiento: this.registrarUsuarioGroup.controls['fecha_nacimiento'].value,
       };
+      return;
       this.peticionRegistrarUsuario(req);
     } else {
       Swal.fire({
         title: "<h1 class='font-bold'>Error en el registro</h1>",
-        html: `<h1 class='font-semibold mb-5'>Es necesario rellenar todos los campos</h1>`,
+        html: `<h1 class='font-semibold mb-5'>Rellena todos los campos de manera correcta</h1>`,
         icon: "error",
         showConfirmButton: false,
         timer: 2000
       });
     }
+  }
+
+  public changePasswordVisibility(){
+    this.hiddenPassword = !this.hiddenPassword;
   }
 
   public peticionRegistrarUsuario(req: IRegistrarUsuario){
