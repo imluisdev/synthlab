@@ -6,5 +6,6 @@ export interface IRegistrarUsuarioGroup {
     apellido_materno: FormControl<string>;
     correo_electronico: FormControl<string>;
     contrasena: FormControl<string>;
+    confirmar_contrasena: FormControl<string>;
     fecha_nacimiento: FormControl<string>;
 }
