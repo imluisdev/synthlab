@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LeccionService } from '../../../../services/leccion.service';
+import { register } from 'swiper/element/bundle';
+register();
 
 @Component({
   selector: 'app-lesson',
@@ -7,6 +9,13 @@ import { LeccionService } from '../../../../services/leccion.service';
   styleUrl: './lesson.component.css'
 })
 export class LessonComponent implements OnInit{
+
+  sliderText = [
+    "Altura(Pitch): Es la percepción que tenemos de un sonido como agudo o grave. En una partitura...",
+    "Viendolo en un piano, entre más a la derecha estén las teclas más agudo sonará y mientras...",
+    "Duración: Es la cantidad de tiempo en el que un sonido es reproducido..."
+  ]
+
     constructor(private leccionService: LeccionService){}
 
     ngOnInit(): void {
