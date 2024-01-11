@@ -10,6 +10,8 @@ register();
 })
 export class LessonComponent implements OnInit{
 
+  imgLength = 1;
+
   sliderText = [
     "Altura(Pitch): Es la percepción que tenemos de un sonido como agudo o grave. En una partitura...",
     "Viendolo en un piano, entre más a la derecha estén las teclas más agudo sonará y mientras...",
