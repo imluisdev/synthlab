@@ -10,20 +10,47 @@ register();
 })
 export class LessonComponent implements OnInit{
 
-  imgLength = 1;
+  public numeroLeccion: number = 1;
+  public numeroDescripcion: number = 1;
+  public leccion: any = [];
+  public imgLength = 2;
+  public titulos: any;
+  public lecciones: any;
+  public descripciones: any;
+  public recursos: any;
 
-  sliderText = [
-    "Altura(Pitch): Es la percepción que tenemos de un sonido como agudo o grave. En una partitura...",
-    "Viendolo en un piano, entre más a la derecha estén las teclas más agudo sonará y mientras...",
-    "Duración: Es la cantidad de tiempo en el que un sonido es reproducido..."
-  ]
+  public siguienteLeccion(){
+    this.numeroLeccion += 1;
+    this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
+    this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+  }
+
+  public cambiarLeccion(id: number){
+    this.numeroLeccion == id;
+    console.log(this.numeroLeccion);
+    this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
+    this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+  }
 
     constructor(private leccionService: LeccionService){}
 
     ngOnInit(): void {
-      this.leccionService.obtenerLeccion({id:1}).subscribe( resp => {
-        console.log(resp);
+      this.leccionService.obtenerTitulos({id:1}).subscribe( (resp:any) => {
+        if(resp.status){
+          this.titulos = resp.results;
+          this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
+        } else{
+          console.log("Error");
+        }
       })
       
+      this.leccionService.obtenerLecciones({id:1}).subscribe( (resp:any) => {
+        if(resp.status){
+          this.lecciones = resp.results;
+          this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+        } else{
+          console.log("Error");
+        }
+      })
     }
 }

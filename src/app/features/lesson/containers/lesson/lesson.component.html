@@ -13,16 +13,16 @@
                 <div class="col-span-7">
                     <div class="flex items-center mb-4 text-2xl text-white bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] p-2 rounded-md">
                         <span class="material-symbols-outlined">play_lesson</span>
-                        <span class="px-2">Lección 1: Propiedades del sonido</span>
+                        <span class="px-2">Lección {{leccion[0]?.id}}: {{leccion[0]?.titulo}}</span>
                     </div>
-                    <div>
+                    <div class="mb-4">
                         <swiper-container pagination="false" effect="coverflow" grab-cursor="true" mousewheel="true" navigation="true" keyboard="true" coverflow-effect-stretch="0" coverflow-effect-depth="200" coverflow-effect-modifier="1" coverflow-effect-slide-shadows="false">
-                            <swiper-slide *ngFor="let text of sliderText">
-                                <div class="flex flex-col items-center text-lg bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-96 rounded-md">
-                                    <div class="bg-white pt-4 px-10 h-96 rounded-md">
-                                        <span class="">{{text}}</span>
-                                        @if(imgLength == 1){
-                                        <div class="grid grid-cols-2 gap-4">
+                            <swiper-slide *ngFor="let descripcion of descripciones">
+                                <div class="flex flex-col items-center text-lg bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-80 rounded-md">
+                                    <div class="bg-white pt-4 px-10 h-80 rounded-md">
+                                        <span>{{descripcion.descripcion}}</span>
+                                        @if(imgLength == 2){
+                                        <div class="grid grid-cols-2 gap-4 mt-4">
                                             <div class="col-span-1">
                                                 <div class="flex flex-col items-center">
                                                     <audio controls class="text-sm p-1">
@@ -42,7 +42,7 @@
                                         </div>
                                         }
                                         @else{
-                                            <div class="flex flex-col items-center">
+                                            <div class="flex flex-col items-center mt-4">
                                                 <audio controls class="text-sm p-1">
                                                     <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
                                                 </audio>
@@ -54,25 +54,35 @@
                             </swiper-slide>
                         </swiper-container>
                     </div>
+                    <div class="flex justify-center">
+                        <a href="#" class="button mx-auto shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0">
+                            Tomar Quiz
+                        </a>
+                    </div>
                 </div>
                 <div class="col-span-3">
                     <div class="flex items-center mb-4 text-2xl text-white bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] p-2 rounded-md">
                         <span class="material-symbols-outlined">table_chart_view</span>
                         <span class="px-2">Progreso de lecciones</span>
                     </div>
-                    <div class="flex flex-col mb-4 text-lg text-black bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-96 rounded-md">
-                        <div class="bg-white pt-4 px-4 h-96 rounded-md">
+                    <div class="flex flex-col mb-4 text-lg text-black bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 h-80 rounded-md">
+                        <div class="bg-white pt-3 px-4 h-80 rounded-md">
                             <div>
                                 <ul>
-                                    <li>Leccion 1</li>
-                                    <li>Leccion 2</li>
-                                    <li>Leccion 3</li>
-                                    <li>Leccion 4</li>
-                                    <li>Leccion 5</li>
+                                    <li *ngFor="let titulo of titulos" (click)="cambiarLeccion(1)"
+                                    class="flex items-center mb-2 hover:text-orange-500 hover:cursor-pointer p-1 bg-gray-100 rounded-md">
+                                        <span class="material-symbols-outlined cursor-pointer">play_arrow</span>
+                                        <span class="px-1">{{titulo.id}}.</span>
+                                        <span class="px-1">{{titulo.titulo}}</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
-                        
+                    </div>
+                    <div class="flex justify-center">
+                        <button (click)="siguienteLeccion()" class="button mx-auto shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0">
+                            Siguiente Lección
+                        </button>
                     </div>
                 </div>
             </div>
