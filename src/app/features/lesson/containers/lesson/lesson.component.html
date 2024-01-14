@@ -18,46 +18,19 @@
                     <div class="mb-4">
                         <swiper-container pagination="false" effect="coverflow" grab-cursor="true" mousewheel="true" navigation="true" keyboard="true" coverflow-effect-stretch="0" coverflow-effect-depth="200" coverflow-effect-modifier="1" coverflow-effect-slide-shadows="false">
                             <swiper-slide *ngFor="let descripcion of descripciones">
-                                <div class="flex flex-col items-center text-lg bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-80 rounded-md">
-                                    <div class="bg-white pt-4 px-10 h-80 rounded-md">
-                                        <span>{{descripcion.descripcion}}</span>
-                                        @if(imgLength == 2){
-                                        <div class="grid grid-cols-2 gap-4 mt-4">
-                                            <div class="col-span-1">
-                                                <div class="flex flex-col items-center">
-                                                    <audio controls class="text-sm p-1">
-                                                        <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
-                                                    </audio>
-                                                    <img src="assets/img/synthlab.png" class="w-40 py-2">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-1">
-                                                <div class="flex flex-col items-center">
-                                                    <audio controls class="text-sm p-1">
-                                                        <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
-                                                    </audio>
-                                                    <img src="assets/img/synthlab.png" class="w-40 py-2">
-                                                </div>
-                                            </div>
+                                <div class="flex flex-col items-center text-lg bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-96 rounded-md">
+                                    <div class="bg-white pt-6 px-10 h-96 rounded-md">
+                                        <span class="text-justify">{{descripcion.descripcion}}</span>
+                                        <div class="flex flex-col items-center">
+                                            <audio controls class="h-6 m-3">
+                                                <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
+                                            </audio>
+                                            <img src="{{descripcion.imagen_path}}" class="w-48">
                                         </div>
-                                        }
-                                        @else{
-                                            <div class="flex flex-col items-center mt-4">
-                                                <audio controls class="text-sm p-1">
-                                                    <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
-                                                </audio>
-                                                <img src="assets/img/synthlab.png" class="w-40 py-2">
-                                            </div>
-                                        }
                                     </div>
                                 </div>
                             </swiper-slide>
                         </swiper-container>
-                    </div>
-                    <div class="flex justify-center">
-                        <a href="#" class="button mx-auto shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0">
-                            Tomar Quiz
-                        </a>
                     </div>
                 </div>
                 <div class="col-span-3">

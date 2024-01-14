@@ -17,12 +17,8 @@ export class LeccionService {
     return this.httpService.post('/titulos', req);
   }
 
-  public obtenerLecciones(req: ILeccionRequest){
-    return this.httpService.post('/lecciones', req);
-  }
-
-  public obtenerRecursos(req: ILeccionRequest){
-    return this.httpService.post('/recursos', req);
+  public obtenerContenidos(req: ILeccionRequest){
+    return this.httpService.post('/contenidos', req);
   }
   
 }
