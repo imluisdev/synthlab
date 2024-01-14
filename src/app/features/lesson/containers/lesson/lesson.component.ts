@@ -44,10 +44,11 @@ export class LessonComponent implements OnInit{
         }
       })
       
-      this.leccionService.obtenerLecciones({id:1}).subscribe( (resp:any) => {
+      this.leccionService.obtenerContenidos({id:1}).subscribe( (resp:any) => {
         if(resp.status){
           this.lecciones = resp.results;
           this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+          console.log(this.descripciones);
         } else{
           console.log("Error");
         }
