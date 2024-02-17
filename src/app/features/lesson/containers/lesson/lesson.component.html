@@ -21,11 +21,8 @@
                                 <div class="flex flex-col items-center text-lg bg-gradient-to-r from-[#f5953c] to-[#e43558] hover:cursor-pointer p-2 h-96 rounded-md">
                                     <div class="bg-white pt-6 px-10 h-96 rounded-md">
                                         <span class="text-justify">{{descripcion.descripcion}}</span>
-                                        <div class="flex flex-col items-center">
-                                            <audio controls class="h-6 m-3">
-                                                <source src="assets/audio/ejemplo.mp3" type="audio/mpeg">
-                                            </audio>
-                                            <img src="{{descripcion.imagen_path}}" class="w-48">
+                                         <div class="flex flex-col items-center">
+                                            <img src="{{descripcion.recurso}}" class="mt-2 h-56 rounded-md">
                                         </div>
                                     </div>
                                 </div>
@@ -36,13 +33,13 @@
                 <div class="col-span-3">
                     <div class="flex items-center mb-4 text-2xl text-white bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] p-2 rounded-md">
                         <span class="material-symbols-outlined">table_chart_view</span>
-                        <span class="px-2">Progreso de lecciones</span>
+                        <span class="px-2">Lecciones teóricas</span>
                     </div>
                     <div class="flex flex-col mb-4 text-lg text-black bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 h-80 rounded-md">
-                        <div class="bg-white pt-3 px-4 h-80 rounded-md">
+                        <div class="bg-white pt-3 px-2 h-80 rounded-md overflow-y-auto">
                             <div>
                                 <ul>
-                                    <li *ngFor="let titulo of titulos" (click)="cambiarLeccion(1)"
+                                    <li *ngFor="let titulo of titulos" (click)="cambiarLeccion(titulo.id)"
                                     class="flex items-center mb-2 hover:text-orange-500 hover:cursor-pointer p-1 bg-gray-100 rounded-md">
                                         <span class="material-symbols-outlined cursor-pointer">play_arrow</span>
                                         <span class="px-1">{{titulo.id}}.</span>

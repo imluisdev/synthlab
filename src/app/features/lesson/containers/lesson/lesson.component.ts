@@ -25,9 +25,8 @@ export class LessonComponent implements OnInit{
     this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
   }
 
-  public cambiarLeccion(id: number){
-    this.numeroLeccion == id;
-    console.log(this.numeroLeccion);
+  public cambiarLeccion(id: any){
+    this.numeroLeccion = id;
     this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
     this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
   }
