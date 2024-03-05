@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path: 'lesson',
         loadChildren: () => import('./features/lesson/lesson.module').then(m => m.LessonModule)
+      },
+      {
+        path: 'melody-generator',
+        loadChildren: () => import('./features/melody-generator/melody-generator.module').then(m => m.MelodyGeneratorModule)
       }
     ]
   }
