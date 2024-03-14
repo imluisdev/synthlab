@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './synth.component.css'
 })
 export class SynthComponent {
-  
+  value: number = 50;
 }
