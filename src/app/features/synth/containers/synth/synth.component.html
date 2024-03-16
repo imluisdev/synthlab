@@ -27,13 +27,13 @@
                                             </div>
                                             <div class="flex col-span-2">
                                                 <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                    <p-knob [(ngModel)]="value" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <p-knob [(ngModel)]="osc1_level" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                     <span class="text-orange-400 font-bold">LEVEL</span>
                                                 </div>
                                             </div>
                                             <div class="flex col-span-2">
                                                 <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                    <p-knob [(ngModel)]="value" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <p-knob [(ngModel)]="osc1_pan" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                     <span class="text-orange-400 font-bold">PAN</span>
                                                 </div>
                                             </div>
@@ -47,26 +47,140 @@
                                         </div>
                                     </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-
+                                    <div class="grid grid-cols-12 gap-2">
+                                        <div class="flex col-span-2">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">OSC2</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="osc2_level" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">LEVEL</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="osc2_pan" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">PAN</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-6">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
+                                                <div class="flex bg-white m-1 rounded-md">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-                                    
+                                    <div class="grid grid-cols-12 gap-2">
+                                        <div class="flex col-span-2">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">FILTR</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="frequency" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">FREQ</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="resonance" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">RES</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-6">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
+                                                <div class="flex bg-white m-1 rounded-md">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-span-1">
                             <div class="grid grid-rows-3 h-full">
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-                                    <div class="flex flex-col">
-                                        <span class="px-2">OSC1</span>
-                                        <p-knob [(ngModel)]="value" [size]="50" [min]="0" [max]="100" [step]="1"></p-knob>
+                                    <div class="grid grid-cols-10 gap-2">
+                                        <div class="flex col-span-2">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">ENV</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="attack" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">ATTACK</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="decay" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">DECAY</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="sustain" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">SUSTAIN</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="release" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">RELEASE</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-
+                                    <div class="grid grid-cols-12 gap-8">
+                                        <div class="flex col-span-2">
+                                            <div class="flex w-12 bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">LFO</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-10">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
+                                                <div class="flex bg-white m-1 rounded-md">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-                                    
+                                    <div class="grid grid-cols-11 gap-10">
+                                        <div class="flex col-span-2">
+                                            <div class="flex w-12 bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-3.5 transform -rotate-90">FX</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-3">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="chorus" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">CHORUS</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-3">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="reverb" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">REVERB</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-3">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
+                                                <p-knob [(ngModel)]="delay" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">DELAY</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
