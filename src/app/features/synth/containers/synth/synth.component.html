@@ -12,56 +12,28 @@
                 <div class="col-span-10">
                     <div class="flex items-center mb-4 text-2xl text-white bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 rounded-md">
                         <span class="material-symbols-outlined">play_lesson</span>
-                        <span class="px-2">Aprende síntesis sonora básica </span>
+                        <span class="px-2">Aprende Síntesis Sonora Básica </span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-0 h-96 text-white bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 rounded-md">
+                    <div class="grid grid-cols-2 gap-0 h-96 text-white bg-gradient-to-r from-[#e43558] to-[#e43558] p-2 rounded-md">
                         <div class="col-span-1">
                             <div class="grid grid-rows-3 h-full">
-                                    <div class="bg-white m-1 rounded-md overflow-hidden">
-                                        <div class="grid grid-cols-12 gap-2">
-                                            <div class="flex col-span-2">
-                                                <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
-                                                    <span class="flex items-center font-bold px-2 transform -rotate-90">OSC1</span>
-                                                </div>
-                                            </div>
-                                            <div class="flex col-span-2">
-                                                <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                    <p-knob [(ngModel)]="osc1_level" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                    <span class="text-orange-400 font-bold">LEVEL</span>
-                                                </div>
-                                            </div>
-                                            <div class="flex col-span-2">
-                                                <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                    <p-knob [(ngModel)]="osc1_pan" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                    <span class="text-orange-400 font-bold">PAN</span>
-                                                </div>
-                                            </div>
-                                            <div class="flex col-span-6">
-                                                <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
-                                                    <div class="flex bg-white m-1 rounded-md">
-                                                        <span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <div class="flex bg-white m-1 rounded-md overflow-hidden">
+                                <div class="bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-12 gap-2">
                                         <div class="flex col-span-2">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
-                                                <span class="flex items-center font-bold px-2 transform -rotate-90">OSC2</span>
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">OSC1</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="osc2_level" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                <span class="text-orange-400 font-bold">LEVEL</span>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="osc1_level" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <span class="text-orange-400 font-bold">LEVEL</span>
+                                                </div>
                                             </div>
-                                        </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="osc2_pan" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="osc1_pan" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">PAN</span>
                                             </div>
                                         </div>
@@ -74,7 +46,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="flex bg-white m-1 rounded-md overflow-hidden">
+                                <div class="bg-white m-1 rounded-md overflow-hidden">
+                                    <div class="grid grid-cols-12 gap-2">
+                                        <div class="flex col-span-2">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                                <span class="flex items-center font-bold px-2 transform -rotate-90">OSC2</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="osc2_level" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <span class="text-orange-400 font-bold">LEVEL</span>
+                                                </div>
+                                            </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="osc2_pan" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">PAN</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-6">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
+                                                <div class="flex bg-white m-1 rounded-md">
+                                                    <span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-12 gap-2">
                                         <div class="flex col-span-2">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
@@ -82,14 +82,14 @@
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="frequency" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                <span class="text-orange-400 font-bold">FREQ</span>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="frequency" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <span class="text-orange-400 font-bold">FREQ</span>
+                                                </div>
                                             </div>
-                                        </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="resonance" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="resonance" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">RES</span>
                                             </div>
                                         </div>
@@ -107,33 +107,33 @@
                         <div class="col-span-1">
                             <div class="grid grid-rows-3 h-full">
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-                                    <div class="grid grid-cols-10 gap-2">
+                                    <div class="grid grid-cols-10 gap-5">
                                         <div class="flex col-span-2">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">ENV</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="attack" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="attack" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">ATTACK</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="decay" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="decay" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">DECAY</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="sustain" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="sustain" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">SUSTAIN</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="release" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="release" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">RELEASE</span>
                                             </div>
                                         </div>
@@ -163,24 +163,79 @@
                                             </div>
                                         </div>
                                         <div class="flex col-span-3">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="chorus" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="chorus" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">CHORUS</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-3">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="reverb" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="reverb" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">REVERB</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-3">
-                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden">
-                                                <p-knob [(ngModel)]="delay" [size]="80" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="delay" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">DELAY</span>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="col-span-2 flex justify-center">
+                            <div class="flex m-1 rounded-md overflow-hidden w-full">
+                                <div class="piano">
+                                    <button class="white-key C2-key"></button>
+                                    <button class="black-key Db2-key"></button>
+                                    <button class="white-key D2-key"></button>
+                                    <button class="black-key Eb2-key"></button>
+                                    <button class="white-key E2-key"></button>
+                                    <button class="white-key F2-key"></button>
+                                    <button class="black-key Gb2-key"></button>
+                                    <button class="white-key G2-key"></button>
+                                    <button class="black-key Ab2-key"></button>
+                                    <button class="white-key A2-key"></button>
+                                    <button class="black-key Bb2-key"></button>
+                                    <button class="white-key B2-key"></button>
+                                    <button class="white-key C3-key"></button>
+                                    <button class="black-key Db3-key"></button>
+                                    <button class="white-key D3-key"></button>
+                                    <button class="black-key Eb3-key"></button>
+                                    <button class="white-key E3-key"></button>
+                                    <button class="white-key F3-key"></button>
+                                    <button class="black-key Gb3-key"></button>
+                                    <button class="white-key G3-key"></button>
+                                    <button class="black-key Ab3-key"></button>
+                                    <button class="white-key A3-key"></button>
+                                    <button class="black-key Bb3-key"></button>
+                                    <button class="white-key B3-key"></button>
+                                    <button class="white-key C4-key"></button>
+                                    <button class="black-key Db4-key"></button>
+                                    <button class="white-key D4-key"></button>
+                                    <button class="black-key Eb4-key"></button>
+                                    <button class="white-key E4-key"></button>
+                                    <button class="white-key F4-key"></button>
+                                    <button class="black-key Gb4-key"></button>
+                                    <button class="white-key G4-key"></button>
+                                    <button class="black-key Ab4-key"></button>
+                                    <button class="white-key A4-key"></button>
+                                    <button class="black-key Bb4-key"></button>
+                                    <button class="white-key B4-key"></button>
+                                    <button class="white-key C5-key"></button>
+                                    <button class="black-key Db5-key"></button>
+                                    <button class="white-key D5-key"></button>
+                                    <button class="black-key Eb5-key"></button>
+                                    <button class="white-key E5-key"></button>
+                                    <button class="white-key F5-key"></button>
+                                    <button class="black-key Gb5-key"></button>
+                                    <button class="white-key G5-key"></button>
+                                    <button class="black-key Ab5-key"></button>
+                                    <button class="white-key A5-key"></button>
+                                    <button class="black-key Bb5-key"></button>
+                                    <button class="white-key B5-key"></button>
+                                    <button class="white-key C6-key"></button>
                                 </div>
                             </div>
                         </div>
