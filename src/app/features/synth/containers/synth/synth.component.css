@@ -1,0 +1,115 @@
+.piano{
+    display: flex;
+    position: relative;
+    margin-left: 4px;
+}
+
+.white-key{
+    width: 40.5px;
+    height: 52px;
+    background-color: #FFF;
+    border: 4px solid #e43558;
+    border-radius: 0 0 6px 6px;
+    margin-left: -4px;
+    outline: none;
+    cursor: pointer;
+}
+
+.white-key.active{
+    background-color: C0C0C0;
+}
+
+.black-key{
+    position: absolute;
+    width: 24px;
+    height: 30px;
+    background-image: linear-gradient(#e43558, #f5953c);
+    border: 3px solid #e43558;
+    border-radius: 0 0 2px 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.Db2-key{
+    left: 22px;
+}
+
+.Eb2-key{
+    left: 59px;
+}
+
+.Gb2-key{
+    left: 132px;
+}
+
+.Ab2-key{
+    left: 169px;
+}
+
+.Bb2-key{
+    left: 205px;
+}
+
+.Db3-key{
+    left: 278px;
+}
+
+.Eb3-key{
+    left: 315px;
+}
+
+.Gb3-key{
+    left: 387px;
+}
+
+.Ab3-key{
+    left: 424px;
+}
+
+.Bb3-key{
+    left: 461px;
+}
+
+.Db4-key{
+    left: 533px;
+}
+
+.Eb4-key{
+    left: 570px;
+}
+
+.Gb4-key{
+    left: 643px;
+}
+
+.Ab4-key{
+    left: 680px;
+}
+
+.Bb4-key{
+    left: 716px;
+}
+
+.Db5-key{
+    left: 788px;
+}
+
+.Eb5-key{
+    left: 825px;
+}
+
+.Gb5-key{
+    left: 898px;
+}
+
+.Ab5-key{
+    left: 935px;
+}
+
+.Bb5-key{
+    left: 971px;
+}
+
+
+
+
