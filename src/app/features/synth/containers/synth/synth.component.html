@@ -29,18 +29,20 @@
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="osc1_level" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                     <span class="text-orange-400 font-bold">LEVEL</span>
-                                                </div>
                                             </div>
+                                        </div>
                                         <div class="flex col-span-2">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
-                                                <p-knob [(ngModel)]="osc1_pan" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                <span class="text-orange-400 font-bold">PAN</span>
+                                                <p-knob [(ngModel)]="osc1_wave" (ngModelChange)="changeWaveform1(osc1_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">WAVE</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-6">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
-                                                <div class="flex bg-white m-1 rounded-md">
-                                                    <span></span>
+                                                <div class="flex rounded-md">
+                                                    <svg width="600" height="70">
+                                                        <path id="wavePath" fill="none" stroke="white" stroke-width="3" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,14 +63,16 @@
                                             </div>
                                         <div class="flex col-span-2">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
-                                                <p-knob [(ngModel)]="osc2_pan" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
-                                                <span class="text-orange-400 font-bold">PAN</span>
+                                                <p-knob [(ngModel)]="osc2_wave" (ngModelChange)="changeWaveform2(osc2_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <span class="text-orange-400 font-bold">WAVE</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-6">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
-                                                <div class="flex bg-white m-1 rounded-md">
-                                                    <span></span>
+                                                <div class="flex rounded-md">
+                                                    <svg width="600" height="70">
+                                                        <path id="wavePath2" fill="none" stroke="white" stroke-width="3" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                         </div>
