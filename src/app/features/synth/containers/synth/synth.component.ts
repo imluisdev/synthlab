@@ -21,12 +21,15 @@ export class SynthComponent {
   delay: number = 50;
   intervalId: any;
   intervalId2: any;
-
+  intervalLFO: any;
+  lfo_rate: number = 10;
+  lfo_depth: number = 30;
   amplitude: number = 30; // Amplitud de la onda sinusoidal
   frequency: number = 10; // Frecuencia de la onda sinusoidal en Hz
   time: number = 0; // Tiempo en segundos
   svgElement: any; 
-  svgElement2: any; // Elemento SVG para la onda sinusoidal
+  svgElement2: any;
+  svgLFO: any;
   waveform: string = 'sinusoidal';
   waveform2: string = 'sinusoidal';
 
@@ -37,6 +40,8 @@ export class SynthComponent {
     this.updateWave1();
     this.svgElement2 = document.getElementById('wavePath2');
     this.updateWave2();
+    this.svgLFO = document.getElementById('wavePathLFO');
+    this.updateWaveLFO();
   }
 
   changeWaveform1(value: number): void {
@@ -130,6 +135,28 @@ export class SynthComponent {
         path += `${x},${y} `;
       }
       this.svgElement2.setAttribute('d', `M 0 100 ${path}`);
+    }, 10); // Intervalo de actualización en milisegundos
+  }
+
+  calculateWaveYLFO(x: number): number {
+    let y = 0;
+    y = Math.sin(2 * Math.PI * this.lfo_rate * (x / 600) + this.time) * this.lfo_depth + 35;
+    return y;
+  }
+
+  updateWaveLFO(): void {
+    if (this.intervalLFO) {
+      clearInterval(this.intervalLFO); // Detener el intervalo existente
+    }
+  
+    this.intervalLFO = setInterval(() => {
+      this.time += 0.05; // Incrementa el tiempo para avanzar en la onda sinusoidal
+      let path = '';
+      for (let x = 0; x <= 600; x += 5) {
+        const y = this.calculateWaveYLFO(x);
+        path += `${x},${y} `;
+      }
+      this.svgLFO.setAttribute('d', `M 0 100 ${path}`);
     }, 10); // Intervalo de actualización en milisegundos
   }
 }

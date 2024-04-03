@@ -144,16 +144,30 @@
                                     </div>
                                 </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
-                                    <div class="grid grid-cols-12 gap-8">
+                                    <div class="grid grid-cols-12 gap-2">
                                         <div class="flex col-span-2">
-                                            <div class="flex w-12 bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
+                                            <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">LFO</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-10">
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="lfo_rate" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                    <span class="text-orange-400 font-bold">RATE</span>
+                                                </div>
+                                            </div>
+                                        <div class="flex col-span-2">
+                                            <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
+                                                <p-knob [(ngModel)]="lfo_depth" (ngModelChange)="changeWaveform2(osc2_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="50" [step]="0.5"></p-knob>
+                                                <span class="text-orange-400 font-bold">DEPTH</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex col-span-6">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
-                                                <div class="flex bg-white m-1 rounded-md">
-                                                    <span></span>
+                                                <div class="flex rounded-md">
+                                                    <svg width="600" height="70">
+                                                        <path id="wavePathLFO" fill="none" stroke="white" stroke-width="3" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                         </div>
