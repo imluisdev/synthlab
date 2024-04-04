@@ -9,3 +9,8 @@ export interface IRegistrarUsuarioGroup {
     confirmar_contrasena: FormControl<string>;
     fecha_nacimiento: FormControl<string>;
 }
+
+export interface ILoginGroup {
+    correo_electronico: FormControl<string>;
+    contrasena: FormControl<string>;
+}
