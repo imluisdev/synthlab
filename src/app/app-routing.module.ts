@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'synth',
         loadChildren: () => import('./features/synth/synth.module').then(m => m.SynthModule)
+      },
+      {
+        path: 'quiz',
+        loadChildren: () => import('./features/quiz/quiz.module').then(m => m.QuizModule)
       }
     ]
   }

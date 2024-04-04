@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { IRegistrarUsuarioGroup } from '../../../../models/form.models';
+import { ILoginGroup, IRegistrarUsuarioGroup } from '../../../../models/form.models';
 import { IRegistrarUsuario } from '../../../../models/usuario.models';
 import { UsuarioService } from '../../../../services/usuario.service';
 import { finalize, take, timer } from 'rxjs';
@@ -17,6 +17,9 @@ export class RegistrarComponent implements OnInit {
   constructor(private formulario: NonNullableFormBuilder, private usuarioService: UsuarioService, private router: Router) {}
 
   public registrarUsuarioGroup: FormGroup<IRegistrarUsuarioGroup>;
+  public iniciarSesionGroup: FormGroup<ILoginGroup>;
+  public registrar: boolean = true;
+  public login: boolean = false;
   public loading: boolean;
   public hiddenPassword: boolean = true;
   public hiddenConfirmationPassword: boolean = true;
@@ -26,14 +29,45 @@ export class RegistrarComponent implements OnInit {
 
   ngOnInit() {
     this.armarFormularioRegistro();
+    this.armarFormularioLogin();
   }
 
   public hola(){
-
     this.hasCapitalLetter = /[A-Z]/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
     this.hasNumber = /\d/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
     this.hasSymbol = /[^a-zA-Z0-9]/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
+  }
 
+  public iniciarSesion(e: any){
+    e.preventDefault();
+    if(this.iniciarSesionGroup.valid){
+      Swal.fire({
+        title: "<h1 class='font-bold'>Inicio de sesión exitoso!</h1>",
+        html: `<h1 class='font-semibold mb-5'>Has iniciado sesión de manera correcta</h1>`,
+        icon: "success",
+        showConfirmButton: false,
+        timer: 2000,
+        didClose: () => this.router.navigate(['/synth'])
+      });
+    } else {
+      Swal.fire({
+        title: "<h1 class='font-bold'>Error en el inicio de sesión</h1>",
+        html: `<h1 class='font-semibold mb-5'>Alguno de los datos es incorrecto</h1>`,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000
+      });
+    }
+  }
+
+  public toggleViewLogin(){
+    this.login = true;
+    this.registrar = false;
+  }
+
+  public toggleViewRegistro(){
+    this.registrar = true;
+    this.login = false;
   }
 
   public armarFormularioRegistro(){
@@ -45,6 +79,13 @@ export class RegistrarComponent implements OnInit {
       contrasena: ['', [Validators.required, Validators.minLength(8)]],
       confirmar_contrasena: ['', [Validators.required, Validators.minLength(8)]],
       fecha_nacimiento: ['', Validators.required],
+    });
+  }
+
+  public armarFormularioLogin(){
+    this.iniciarSesionGroup = this.formulario.group({
+      correo_electronico: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
