@@ -1,0 +1,30 @@
+<body class="font-sans">
+    <div class="flex fixed h-screen w-full">
+        <app-sidebar></app-sidebar>
+        <div class="flex flex-col w-full">
+            <div class="flex justify-center mt-8 mb-5">
+                <span class="font-bold text-4xl bg-gradient-to-tr from-[#f5743c] to-[#e43558] text-transparent bg-clip-text">{{ leccion.titulo }}</span>
+            </div>
+
+            <div class="px-10 mt-4">
+                <div *ngFor="let pregunta of preguntas; let i = index" class="bg-gray-100 rounded-xl border-l-4 border-orange-600 p-6 mt-6">
+                    <mat-accordion>
+                        <mat-expansion-panel hideToggle>
+    
+                            <mat-expansion-panel-header>
+                                <mat-panel-title class="text-base font-semibold">{{ i + 1 }}. {{ pregunta.pregunta }}</mat-panel-title>
+                                <!-- <mat-panel-description>This is a summary of the content</mat-panel-description> -->
+                            </mat-expansion-panel-header>
+    
+                            <div *ngFor="let opcion of pregunta.opciones" class="mt-2">
+                                <span>{{ opcion.respuesta }} </span>
+                            </div>
+    
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
