@@ -7,27 +7,27 @@ import { getContext, Envelope, Oscillator, Destination, Transport } from 'tone';
   styleUrl: './synth.component.css'
 })
 export class SynthComponent {
-  osc1_level: number = 50;
+  osc1_unison: number = 0;
   osc1_wave: number = 0;
   osc2_level: number = 50;
   osc2_wave: number = 0;
-  frequency_filter: number = 50;
-  resonance: number = 50;
-  attack: number = 50;
-  decay: number = 50;
-  sustain: number = 50;
-  release: number = 50;
+  frequency_filter: number = 9500;
+  resonance: number = 5;
+  attack: number = 0.1;
+  decay: number = 0.2;
+  sustain: number = 0.5;
+  release: number = 0.3;
   chorus: number = 50;
   reverb: number = 50;
   delay: number = 50;
   intervalId: any;
   intervalId2: any;
   intervalLFO: any;
-  lfo_rate: number = 10;
-  lfo_depth: number = 30;
-  amplitude: number = 30; // Amplitud de la onda sinusoidal
-  frequency: number = 10; // Frecuencia de la onda sinusoidal en Hz
-  time: number = 0; // Tiempo en segundos
+  lfo_rate: number = 5;
+  lfo_depth: number = 15;
+  amplitude: number = 30;
+  frequency: number = 10;
+  time: number = 0;
   svgElement: any; 
   svgElement2: any;
   svgLFO: any;
@@ -48,7 +48,25 @@ export class SynthComponent {
   playNote(note: string): void {
     const audioContext = new AudioContext();
     const osc1 = audioContext.createOscillator();
-    osc1.connect(audioContext.destination);
+    const gainNode = audioContext.createGain();
+    const filterNode = audioContext.createBiquadFilter();
+    const lfo = audioContext.createOscillator(); // Crear el LFO
+    const lfoGain = audioContext.createGain(); // Nodo de ganancia para el LFO
+    osc1.connect(filterNode); // Conectar el oscilador al filtro
+    filterNode.connect(gainNode); // Conectar el filtro al nodo de ganancia
+    gainNode.connect(audioContext.destination); 
+    // Conectar el LFO al oscilador principal
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc1.frequency); // Conectar el LFO a la frecuencia del oscilador principal
+
+    // Resto del código...
+
+    // Configurar el LFO
+    lfo.frequency.value = this.lfo_rate; // Aumenta el rango de frecuencia del LFO
+    lfo.type = 'sine'; // Experimenta con diferentes formas de onda
+    lfo.start();
+
+    lfoGain.gain.value = this.lfo_depth * 10;
 
     interface FrequencyMap {
       [note: string]: number;
@@ -107,15 +125,27 @@ export class SynthComponent {
     };
     const frequency = frequencies[note];
 
-    const actx = new (AudioContext)();
-    if(!actx) throw 'Not supported';
-    const osc = actx.createOscillator();
-    osc.type = this.waveform;
-    osc.frequency.value = frequency;
-    osc.connect(actx.destination);
-    osc.start();
-    osc.stop(actx.currentTime + 0.5);
+    osc1.type = this.waveform;
+    osc1.frequency.value = frequency;
+    osc1.start();
 
+    filterNode.type = 'lowpass'; // Tipo de filtro (puedes cambiarlo según necesites)
+    filterNode.frequency.value = this.frequency_filter; // Frecuencia del filtro (ajusta según lo necesites)
+    filterNode.Q.value = this.resonance; // Resonancia del filtro (ajusta según lo necesites)
+
+    const attackTime = this.attack;
+    const decayTime = this.decay;
+    const sustainLevel = this.sustain;
+    const releaseTime = this.release;
+
+    const now = audioContext.currentTime;
+    gainNode.gain.setValueAtTime(0, now);
+    gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
+    gainNode.gain.linearRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
+    gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime);
+    gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime);
+
+    osc1.stop(audioContext.currentTime + attackTime + decayTime + releaseTime);
 
   }
 
