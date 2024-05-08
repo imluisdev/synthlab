@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { getContext, Envelope, Oscillator, Destination, Transport } from 'tone';
 
 @Component({
   selector: 'app-synth-generator',
@@ -7,67 +6,37 @@ import { getContext, Envelope, Oscillator, Destination, Transport } from 'tone';
   styleUrl: './synth.component.css'
 })
 export class SynthComponent {
-  osc1_unison: number = 0;
-  osc1_wave: number = 0;
-  osc2_level: number = 50;
-  osc2_wave: number = 0;
+  osc_unison: number = 0;
+  osc_wave: number = 0;
   frequency_filter: number = 9500;
   resonance: number = 5;
   attack: number = 0.1;
   decay: number = 0.2;
   sustain: number = 0.5;
   release: number = 0.3;
-  chorus: number = 50;
-  reverb: number = 50;
-  delay: number = 50;
   intervalId: any;
-  intervalId2: any;
   intervalLFO: any;
-  lfo_rate: number = 5;
+  lfo_rate: number = 0;
   lfo_depth: number = 15;
   amplitude: number = 30;
   frequency: number = 10;
   time: number = 0;
-  svgElement: any; 
-  svgElement2: any;
-  svgLFO: any;
-  waveform: any = 'sine';
-  waveform2: any = 'sine';
+  svgElement: HTMLElement | null; 
+  svgLFO: HTMLElement | null;
+  waveform: OscillatorType = 'sine';
 
   constructor() { }
 
   ngOnInit(): void {
     this.svgElement = document.getElementById('wavePath');
-    this.updateWave1();
-    this.svgElement2 = document.getElementById('wavePath2');
-    this.updateWave2();
+    this.updateWave();
     this.svgLFO = document.getElementById('wavePathLFO');
     this.updateWaveLFO();
   }
 
   playNote(note: string): void {
-    const audioContext = new AudioContext();
-    const osc1 = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    const filterNode = audioContext.createBiquadFilter();
-    const lfo = audioContext.createOscillator(); // Crear el LFO
-    const lfoGain = audioContext.createGain(); // Nodo de ganancia para el LFO
-    osc1.connect(filterNode); // Conectar el oscilador al filtro
-    filterNode.connect(gainNode); // Conectar el filtro al nodo de ganancia
-    gainNode.connect(audioContext.destination); 
-    // Conectar el LFO al oscilador principal
-    lfo.connect(lfoGain);
-    lfoGain.connect(osc1.frequency); // Conectar el LFO a la frecuencia del oscilador principal
-
-    // Resto del código...
-
-    // Configurar el LFO
-    lfo.frequency.value = this.lfo_rate; // Aumenta el rango de frecuencia del LFO
-    lfo.type = 'sine'; // Experimenta con diferentes formas de onda
-    lfo.start();
-
-    lfoGain.gain.value = this.lfo_depth * 10;
-
+    const oscBank = new Array(3);
+    
     interface FrequencyMap {
       [note: string]: number;
     }
@@ -123,33 +92,55 @@ export class SynthComponent {
       'B5': 987.77,
       'C6': 1046.50
     };
-    const frequency = frequencies[note];
 
-    osc1.type = this.waveform;
-    osc1.frequency.value = frequency;
-    osc1.start();
+    const createOscillators = (osc_unison: number) => {
+      const frequency = frequencies[note];
+      const audioContext = new AudioContext();
+      const osc = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filterNode = audioContext.createBiquadFilter();
+      const lfo = audioContext.createOscillator();
+      const lfoGain = audioContext.createGain();
+      osc.connect(filterNode);
+      filterNode.connect(gainNode);
+      gainNode.connect(audioContext.destination); 
 
-    filterNode.type = 'lowpass'; // Tipo de filtro (puedes cambiarlo según necesites)
-    filterNode.frequency.value = this.frequency_filter; // Frecuencia del filtro (ajusta según lo necesites)
-    filterNode.Q.value = this.resonance; // Resonancia del filtro (ajusta según lo necesites)
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
 
-    const attackTime = this.attack;
-    const decayTime = this.decay;
-    const sustainLevel = this.sustain;
-    const releaseTime = this.release;
+      lfo.frequency.value = this.lfo_rate;
+      lfo.type = 'sine';
+      lfo.start();
 
-    const now = audioContext.currentTime;
-    gainNode.gain.setValueAtTime(0, now);
-    gainNode.gain.linearRampToValueAtTime(1, now + attackTime);
-    gainNode.gain.linearRampToValueAtTime(sustainLevel, now + attackTime + decayTime);
-    gainNode.gain.setValueAtTime(sustainLevel, now + attackTime + decayTime);
-    gainNode.gain.linearRampToValueAtTime(0, now + attackTime + decayTime + releaseTime);
+      lfoGain.gain.value = this.lfo_depth * 10;
 
-    osc1.stop(audioContext.currentTime + attackTime + decayTime + releaseTime);
+      osc.type = this.waveform;
+      osc.frequency.value = frequency;
+      osc.detune.value = osc_unison;
+      osc.start();
 
+      filterNode.type = 'lowpass';
+      filterNode.frequency.value = this.frequency_filter;
+      filterNode.Q.value = this.resonance;
+
+      const now = audioContext.currentTime;
+      gainNode.gain.setValueAtTime(0, now);
+      gainNode.gain.linearRampToValueAtTime(1, now + this.attack);
+      gainNode.gain.linearRampToValueAtTime(this.sustain, now + this.attack + this.decay);
+      gainNode.gain.setValueAtTime(this.sustain, now + this.attack + this.decay);
+      gainNode.gain.linearRampToValueAtTime(0, now + this.attack + this.decay + this.release);
+
+      osc.stop(audioContext.currentTime + this.attack + this.decay + this.release);
+
+      return osc;
+    }
+
+    oscBank[0] = createOscillators(0);
+    oscBank[1] = createOscillators(this.osc_unison*50);
+    oscBank[2] = createOscillators(-this.osc_unison*50);
   }
 
-  changeWaveform1(value: number): void {
+  changeWaveform(value: number): void {
     if (value <= 33) {
       this.waveform = 'sine';
     } else if (value <= 66) {
@@ -157,22 +148,22 @@ export class SynthComponent {
     } else {
       this.waveform = 'square';
     }
-    this.updateWave1();
+    this.updateWave();
   }
 
-  calculateWaveY1(x: number): number {
+  calculateWaveY(x: number): number {
     let y = 0;
     if (this.waveform === 'sine') {
       y = Math.sin(2 * Math.PI * this.frequency * (x / 600) + this.time) * this.amplitude + 35;
     } else if (this.waveform === 'triangle') {
-      const period = 800 / this.frequency; // Periodo de la onda triangular
-      const phase = this.time * (600 / period); // Fase de la onda triangular
-      const normalizedX = (x + phase) % period; // Posición normalizada dentro del período
-      const halfPeriod = period / 2; // Mitad del período
+      const period = 800 / this.frequency;
+      const phase = this.time * (600 / period);
+      const normalizedX = (x + phase) % period;
+      const halfPeriod = period / 2;
       if (normalizedX <= halfPeriod) {
-        y = (normalizedX / halfPeriod) * this.amplitude * 2 + 5; // Doble amplitud para emparejar con otras formas de onda
+        y = (normalizedX / halfPeriod) * this.amplitude * 2 + 5;
       } else {
-        y = ((period - normalizedX) / halfPeriod) * this.amplitude * 2 + 5; // Doble amplitud para emparejar con otras formas de onda
+        y = ((period - normalizedX) / halfPeriod) * this.amplitude * 2 + 5;
       }
     } else if (this.waveform === 'square') {
       y = Math.sign(Math.sin(2 * Math.PI * this.frequency * (x / 600) + this.time)) * this.amplitude * 1.1 + 35;
@@ -180,67 +171,24 @@ export class SynthComponent {
     return y;
   }
 
-  updateWave1(): void {
+  updateWave(): void {
     if (this.intervalId) {
-      clearInterval(this.intervalId); // Detener el intervalo existente
+      clearInterval(this.intervalId);
     }
   
     this.intervalId = setInterval(() => {
-      this.time += 0.05; // Incrementa el tiempo para avanzar en la onda sinusoidal
+      this.time += 0.05;
       let path = '';
       for (let x = 0; x <= 600; x += 5) {
-        const y = this.calculateWaveY1(x);
+        const y = this.calculateWaveY(x);
         path += `${x},${y} `;
       }
-      this.svgElement.setAttribute('d', `M 0 100 ${path}`);
-    }, 10); // Intervalo de actualización en milisegundos
-  }
-
-  changeWaveform2(value: number): void {
-    if (value <= 33) {
-      this.waveform2 = 'sine';
-    } else if (value <= 66) {
-      this.waveform2 = 'triangle';
-    } else {
-      this.waveform2 = 'square';
-    }
-    this.updateWave2();
-  }
-
-  calculateWaveY2(x: number): number {
-    let y = 0;
-    if (this.waveform2 === 'sine') {
-      y = Math.sin(2 * Math.PI * this.frequency * (x / 600) + this.time) * this.amplitude + 35;
-    } else if (this.waveform2 === 'triangle') {
-      const period = 800 / this.frequency; // Periodo de la onda triangular
-      const phase = this.time * (600 / period); // Fase de la onda triangular
-      const normalizedX = (x + phase) % period; // Posición normalizada dentro del período
-      const halfPeriod = period / 2; // Mitad del período
-      if (normalizedX <= halfPeriod) {
-        y = (normalizedX / halfPeriod) * this.amplitude * 2 + 5; // Doble amplitud para emparejar con otras formas de onda
+      if (this.svgElement) {
+        this.svgElement.setAttribute('d', `M 0 100 ${path}`);
       } else {
-        y = ((period - normalizedX) / halfPeriod) * this.amplitude * 2 + 5; // Doble amplitud para emparejar con otras formas de onda
+        console.error('this.svgElement is null or undefined');
       }
-    } else if (this.waveform2 === 'square') {
-      y = Math.sign(Math.sin(2 * Math.PI * this.frequency * (x / 600) + this.time)) * this.amplitude * 1.1 + 35;
-    }
-    return y;
-  }
-
-  updateWave2(): void {
-    if (this.intervalId2) {
-      clearInterval(this.intervalId2); // Detener el intervalo existente
-    }
-  
-    this.intervalId2 = setInterval(() => {
-      this.time += 0.05; // Incrementa el tiempo para avanzar en la onda sinusoidal
-      let path = '';
-      for (let x = 0; x <= 600; x += 5) {
-        const y = this.calculateWaveY2(x);
-        path += `${x},${y} `;
-      }
-      this.svgElement2.setAttribute('d', `M 0 100 ${path}`);
-    }, 10); // Intervalo de actualización en milisegundos
+    }, 10);
   }
 
   calculateWaveYLFO(x: number): number {
@@ -251,19 +199,21 @@ export class SynthComponent {
 
   updateWaveLFO(): void {
     if (this.intervalLFO) {
-      clearInterval(this.intervalLFO); // Detener el intervalo existente
+      clearInterval(this.intervalLFO);
     }
   
     this.intervalLFO = setInterval(() => {
-      this.time += 0.05; // Incrementa el tiempo para avanzar en la onda sinusoidal
+      this.time += 0.05;
       let path = '';
       for (let x = 0; x <= 600; x += 5) {
         const y = this.calculateWaveYLFO(x);
         path += `${x},${y} `;
       }
-      this.svgLFO.setAttribute('d', `M 0 100 ${path}`);
-    }, 10); // Intervalo de actualización en milisegundos
+      if (this.svgLFO) {
+        this.svgLFO.setAttribute('d', `M 0 100 ${path}`);
+      } else {
+        console.error('this.svgElement is null or undefined');
+      }
+    }, 10);
   }
-
-
 }
