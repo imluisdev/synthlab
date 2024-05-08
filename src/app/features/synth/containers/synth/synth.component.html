@@ -27,13 +27,13 @@
                                         </div>
                                         <div class="flex col-span-2">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
-                                                <p-knob [(ngModel)]="osc1_unison" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <p-knob [(ngModel)]="osc_unison" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="24" [step]="1"></p-knob>
                                                     <span class="text-orange-400 font-bold">UNISON</span>
                                             </div>
                                         </div>
                                         <div class="flex col-span-2">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
-                                                <p-knob [(ngModel)]="osc1_wave" (ngModelChange)="changeWaveform1(osc1_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
+                                                <p-knob [(ngModel)]="osc_wave" (ngModelChange)="changeWaveform(osc_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">WAVE</span>
                                             </div>
                                         </div>
@@ -128,7 +128,7 @@
                                             </div>
                                         <div class="flex col-span-2">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
-                                                <p-knob [(ngModel)]="lfo_depth" (ngModelChange)="changeWaveform2(osc2_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="50" [step]="0.5"></p-knob>
+                                                <p-knob [(ngModel)]="lfo_depth" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="50" [step]="0.5"></p-knob>
                                                 <span class="text-orange-400 font-bold">DEPTH</span>
                                             </div>
                                         </div>
