@@ -15,8 +15,14 @@
     cursor: pointer;
 }
 
-.white-key.active{
-    background-color: #a19898;
+.white-key-active{
+    width: 40.5px;
+    height: 52px;
+    background-color: #f5953c;
+    border-radius: 0 0 6px 6px;
+    margin-left: -4px;
+    outline: none;
+    cursor: pointer;
 }
 
 .black-key{
@@ -24,6 +30,17 @@
     width: 24px;
     height: 30px;
     background-image: linear-gradient(#e43558, #f5953c);
+    border: 3px solid #e43558;
+    border-radius: 0 0 2px 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.black-key-active{
+    position: absolute;
+    width: 24px;
+    height: 30px;
+    background-image: linear-gradient(#e43558, #FFF);
     border: 3px solid #e43558;
     border-radius: 0 0 2px 2px;
     outline: none;
