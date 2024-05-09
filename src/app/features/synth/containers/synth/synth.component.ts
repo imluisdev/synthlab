@@ -25,6 +25,10 @@ export class SynthComponent {
   svgLFO: HTMLElement | null;
   waveform: OscillatorType = 'sine';
 
+  isHovered: boolean = false;
+  hoveredElement: string = '¿Que elementos componen un sintetizador?';
+  hoveredElementDescription: string = 'Coloca el mouse sobre un elemento del sintetizador para saber más sobre el';
+
   constructor() { }
 
   ngOnInit(): void {
@@ -32,6 +36,18 @@ export class SynthComponent {
     this.updateWave();
     this.svgLFO = document.getElementById('wavePathLFO');
     this.updateWaveLFO();
+  }
+
+  handleMouseOver(element: string, description: string): void {
+    this.isHovered = true;
+    this.hoveredElement = element;
+    this.hoveredElementDescription = description;
+  }
+
+  handleMouseLeave(): void {
+    this.isHovered = false;
+    this.hoveredElement = '¿Que elementos componen un sintetizador?';
+    this.hoveredElementDescription = 'Coloca el mouse sobre un elemento del sintetizador para saber más sobre el';
   }
 
   playNote(note: string): void {

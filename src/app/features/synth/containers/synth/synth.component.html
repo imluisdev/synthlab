@@ -15,29 +15,38 @@
                         <span class="px-2">Aprende Síntesis Sonora Básica </span>
                     </div>
 
+                    <div [ngClass]="{'hovered': isHovered}" class=" mb-4 text-2xl text-white bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 rounded-md">
+                        <span class="flex justify-center font-bold px-2"> {{ hoveredElement }} </span>
+                        <p class="flex justify-center px-2 text-lg"> {{ hoveredElementDescription }} </p>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-0 h-72 text-white bg-gradient-to-r from-[#e43558] to-[#e43558] p-2 rounded-md">
                         <div class="col-span-1">
                             <div class="grid grid-rows-2 h-full">
                                 <div class="bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-12 gap-2">
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Oscilador', 'Este módulo es un generador de sonido que produce ondas de audio, y es la base para crear diferentes sonidos y efectos musicales')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">OSC1</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Unison', 'Este parámetro sirve para duplicar o multiplicar la misma nota o sonido para crear una sensación de grosor o densidad en la música')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="osc_unison" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="24" [step]="1"></p-knob>
                                                     <span class="text-orange-400 font-bold">UNISON</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Wave', 'Este parámetro sirve para modificar la forma de onda, pudiendo ser senoidal, cuadrada o triangular')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="osc_wave" (ngModelChange)="changeWaveform(osc_wave)" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="100" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">WAVE</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-6">
+                                        <div class="flex col-span-6"
+                                        (mouseover)="handleMouseOver('Wave View', 'Es una representación de la onda de sonido que estamos generando')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
                                                 <div class="flex rounded-md">
                                                     <svg width="600" height="70">
@@ -50,24 +59,28 @@
                                 </div>
                                 <div class="bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-12 gap-2">
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Filter', 'Este módulo altera la frecuencia de una señal de audio al dejar pasar ciertas frecuencias mientras atenúa o elimina otras')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">FILTR</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Frequency', 'Este parámetro sirve para elegir la frecuencia en Hz que afectaremos en el filtro')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="frequency_filter" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="10" [max]="10000" [step]="10"></p-knob>
                                                     <span class="text-orange-400 font-bold">FREQ</span>
                                                 </div>
                                             </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Resonance', 'Esté parámetro sirve para elegir cuanta ganancia aplicaremos en el filtro')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="resonance" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="1" [max]="20" [step]="1"></p-knob>
                                                 <span class="text-orange-400 font-bold">RES</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-6">
+                                        <div class="flex col-span-6"
+                                        (mouseover)="handleMouseOver('Filter View', 'Es una representación del Low Pass Filter que estamos aplicando')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
                                                 <div class="flex bg-white m-1 rounded-md">
                                                     <span></span>
@@ -82,30 +95,35 @@
                             <div class="grid grid-rows-2 h-full">
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-10 gap-5">
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Envelope', 'Este módulo nos ayuda a controlar la forma en que se desarrolla un sonido a lo largo del tiempo')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">ENV</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Attack', 'Es el tiempo que tarda el sonido en alcanzar su nivel máximo desde que se inicia la nota')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="attack" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0.1" [max]="1" [step]="0.01"></p-knob>
                                                 <span class="text-orange-400 font-bold">ATTACK</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Decay', 'Es el tiempo que tarda el sonido en bajar desde su nivel máximo hasta el nivel de sostenimiento')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="decay" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0.1" [max]="1" [step]="0.01"></p-knob>
                                                 <span class="text-orange-400 font-bold">DECAY</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Sustain', 'Es el nivel de volumen que se mantiene mientras la nota se sostiene')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="sustain" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0.1" [max]="1" [step]="0.01"></p-knob>
                                                 <span class="text-orange-400 font-bold">SUSTAIN</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Release', 'Es el tiempo que tarda el sonido en desaparecer una vez que se deja de tocar la nota')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="release" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0.1" [max]="1" [step]="0.01"></p-knob>
                                                 <span class="text-orange-400 font-bold">RELEASE</span>
@@ -115,24 +133,28 @@
                                 </div>
                                 <div class="flex bg-white m-1 rounded-md overflow-hidden">
                                     <div class="grid grid-cols-12 gap-2">
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Low Frequency Oscilator', 'Este módulo nos permite modular/cambiar parámetros de sonido a lo largo del tiempo de una manera cíclica y repetitiva')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden">
                                                 <span class="flex items-center font-bold px-2 transform -rotate-90">LFO</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Rate', 'Es la velocidad o frecuencia a la cual la forma de onda del LFO se repite')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="lfo_rate" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="50" [step]="0.5"></p-knob>
                                                     <span class="text-orange-400 font-bold">RATE</span>
                                                 </div>
                                             </div>
-                                        <div class="flex col-span-2">
+                                        <div class="flex col-span-2"
+                                        (mouseover)="handleMouseOver('Depth', 'Es la amplitud o intensidad con la que el LFO modula/cambia los parámetros de sonido')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex flex-col items-center m-1 rounded-md overflow-hidden cursor-pointer">
                                                 <p-knob [(ngModel)]="lfo_depth" [size]="60" textColor="OrangeRed" valueColor="DarkOrange" rangeColor="Gainsboro" [strokeWidth]="5" [min]="0" [max]="50" [step]="0.5"></p-knob>
                                                 <span class="text-orange-400 font-bold">DEPTH</span>
                                             </div>
                                         </div>
-                                        <div class="flex col-span-6">
+                                        <div class="flex col-span-6"
+                                        (mouseover)="handleMouseOver('LFO Wave', 'Es una representación del LFO que estamos aplicando')" (mouseleave)="handleMouseLeave()">
                                             <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-md overflow-hidden w-full">
                                                 <div class="flex rounded-md">
                                                     <svg width="600" height="70">
@@ -148,55 +170,55 @@
                         <div class="col-span-2 flex justify-center">
                             <div class="flex m-1 rounded-md overflow-hidden w-full">
                                 <div class="piano">
-                                    <button class="white-key C2-key"    (click)="playNote('C2')"></button>
-                                    <button class="black-key Db2-key"   (click)="playNote('Db2')"></button>
-                                    <button class="white-key D2-key"    (click)="playNote('D2')"></button>
-                                    <button class="black-key Eb2-key"   (click)="playNote('Eb2')"></button>
-                                    <button class="white-key E2-key"    (click)="playNote('E2')"></button>
-                                    <button class="white-key F2-key"    (click)="playNote('F2')"></button>
-                                    <button class="black-key Gb2-key"   (click)="playNote('Gb2')"></button>
-                                    <button class="white-key G2-key"    (click)="playNote('G2')"></button>
-                                    <button class="black-key Ab2-key"   (click)="playNote('Ab2')"></button>
-                                    <button class="white-key A2-key"    (click)="playNote('A2')"></button>
-                                    <button class="black-key Bb2-key"   (click)="playNote('Bb2')"></button>
-                                    <button class="white-key B2-key"    (click)="playNote('B2')"></button>
-                                    <button class="white-key C3-key"    (click)="playNote('C3')"></button>
-                                    <button class="black-key Db3-key"   (click)="playNote('Db3')"></button>
-                                    <button class="white-key D3-key"    (click)="playNote('D3')"></button>
-                                    <button class="black-key Eb3-key"   (click)="playNote('Eb3')"></button>
-                                    <button class="white-key E3-key"    (click)="playNote('E3')"></button>
-                                    <button class="white-key F3-key"    (click)="playNote('F3')"></button>
-                                    <button class="black-key Gb3-key"   (click)="playNote('Gb3')"></button>
-                                    <button class="white-key G3-key"    (click)="playNote('G3')"></button>
-                                    <button class="black-key Ab3-key"   (click)="playNote('Ab3')"></button>
-                                    <button class="white-key A3-key"    (click)="playNote('A3')"></button>
-                                    <button class="black-key Bb3-key"   (click)="playNote('Bb3')"></button>
-                                    <button class="white-key B3-key"    (click)="playNote('B3')"></button>
-                                    <button class="white-key C4-key"    (click)="playNote('C4')"></button>
-                                    <button class="black-key Db4-key"   (click)="playNote('Db4')"></button>
-                                    <button class="white-key D4-key"    (click)="playNote('D4')"></button>
-                                    <button class="black-key Eb4-key"   (click)="playNote('Eb4')"></button>
-                                    <button class="white-key E4-key"    (click)="playNote('E4')"></button>
-                                    <button class="white-key F4-key"    (click)="playNote('F4')"></button>
-                                    <button class="black-key Gb4-key"   (click)="playNote('Gb4')"></button>
-                                    <button class="white-key G4-key"    (click)="playNote('G4')"></button>
-                                    <button class="black-key Ab4-key"   (click)="playNote('Ab4')"></button>
-                                    <button class="white-key A4-key"    (click)="playNote('A4')"></button>
-                                    <button class="black-key Bb4-key"   (click)="playNote('Bb4')"></button>
-                                    <button class="white-key B4-key"    (click)="playNote('B4')"></button>
-                                    <button class="white-key C5-key"    (click)="playNote('C5')"></button>
-                                    <button class="black-key Db5-key"   (click)="playNote('Db5')"></button>
-                                    <button class="white-key D5-key"    (click)="playNote('D5')"></button>
-                                    <button class="black-key Eb5-key"   (click)="playNote('Eb5')"></button>
-                                    <button class="white-key E5-key"    (click)="playNote('E5')"></button>
-                                    <button class="white-key F5-key"    (click)="playNote('F5')"></button>
-                                    <button class="black-key Gb5-key"   (click)="playNote('Gb5')"></button>
-                                    <button class="white-key G5-key"    (click)="playNote('G5')"></button>
-                                    <button class="black-key Ab5-key"   (click)="playNote('Ab5')"></button>
-                                    <button class="white-key A5-key"    (click)="playNote('A5')"></button>
-                                    <button class="black-key Bb5-key"   (click)="playNote('Bb5')"></button>
-                                    <button class="white-key B5-key"    (click)="playNote('B5')"></button>
-                                    <button class="white-key C6-key"    (click)="playNote('C6')"></button>
+                                    <button class="white-key C2-key"    (click)="playNote('C2')" (mouseover)="handleMouseOver('Nota Musical: C2', 'También conocida como Do')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Db2-key"   (click)="playNote('Db2')" (mouseover)="handleMouseOver('Nota Musical: C#2 / Db2', 'También conocida como Do Sostenido o Re Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key D2-key"    (click)="playNote('D2')" (mouseover)="handleMouseOver('Nota Musical: D2', 'También conocida como Re')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Eb2-key"   (click)="playNote('Eb2')" (mouseover)="handleMouseOver('Nota Musical: D#2 / Eb2', 'También conocida como Re Sostenido o Mi Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key E2-key"    (click)="playNote('E2')" (mouseover)="handleMouseOver('Nota Musical: E2', 'También conocida como Mi')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key F2-key"    (click)="playNote('F2')" (mouseover)="handleMouseOver('Nota Musical: F2', 'También conocida como Fa')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Gb2-key"   (click)="playNote('Gb2')" (mouseover)="handleMouseOver('Nota Musical: F#2 / Gb2', 'También conocida como Fa Sostenido o Sol Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key G2-key"    (click)="playNote('G2')" (mouseover)="handleMouseOver('Nota Musical: G2', 'También conocida como Sol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Ab2-key"   (click)="playNote('Ab2')" (mouseover)="handleMouseOver('Nota Musical: G#2 / Ab2', 'También conocida como Sol Sostenido o La Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key A2-key"    (click)="playNote('A2')" (mouseover)="handleMouseOver('Nota Musical: A2', 'También conocida como La')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Bb2-key"   (click)="playNote('Bb2')" (mouseover)="handleMouseOver('Nota Musical: A#2 / Bb2', 'También conocida como La Sostenido o Si Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key B2-key"    (click)="playNote('B2')" (mouseover)="handleMouseOver('Nota Musical: B2', 'También conocida como Si')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key C3-key"    (click)="playNote('C3')" (mouseover)="handleMouseOver('Nota Musical: C3', 'También conocida como Do')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Db3-key"   (click)="playNote('Db3')" (mouseover)="handleMouseOver('Nota Musical: C#3 / Db3', 'También conocida como Do Sostenido o Re Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key D3-key"    (click)="playNote('D3')" (mouseover)="handleMouseOver('Nota Musical: D3', 'También conocida como Re')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Eb3-key"   (click)="playNote('Eb3')" (mouseover)="handleMouseOver('Nota Musical: D#3 / Eb3', 'También conocida como Re Sostenido o Mi Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key E3-key"    (click)="playNote('E3')" (mouseover)="handleMouseOver('Nota Musical: E3', 'También conocida como Mi')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key F3-key"    (click)="playNote('F3')" (mouseover)="handleMouseOver('Nota Musical: F3', 'También conocida como Fa')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Gb3-key"   (click)="playNote('Gb3')" (mouseover)="handleMouseOver('Nota Musical: F#3 / Gb3', 'También conocida como Fa Sostenido o Sol Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key G3-key"    (click)="playNote('G3')" (mouseover)="handleMouseOver('Nota Musical: G3', 'También conocida como Sol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Ab3-key"   (click)="playNote('Ab3')" (mouseover)="handleMouseOver('Nota Musical: G#3 / Ab3', 'También conocida como Sol Sostenido o La Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key A3-key"    (click)="playNote('A3')" (mouseover)="handleMouseOver('Nota Musical: A3', 'También conocida como La')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Bb3-key"   (click)="playNote('Bb3')" (mouseover)="handleMouseOver('Nota Musical: A#3 / Bb3', 'También conocida como La Sostenido o Si Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key B3-key"    (click)="playNote('B3')" (mouseover)="handleMouseOver('Nota Musical: B3', 'También conocida como Si')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key C4-key"    (click)="playNote('C4')" (mouseover)="handleMouseOver('Nota Musical: C4', 'También conocida como Do')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Db4-key"   (click)="playNote('Db4')" (mouseover)="handleMouseOver('Nota Musical: C#4 / Db4', 'También conocida como Do Sostenido o Re Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key D4-key"    (click)="playNote('D4')" (mouseover)="handleMouseOver('Nota Musical: D4', 'También conocida como Re')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Eb4-key"   (click)="playNote('Eb4')" (mouseover)="handleMouseOver('Nota Musical: D#4 / Eb4', 'También conocida como Re Sostenido o Mi Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key E4-key"    (click)="playNote('E4')" (mouseover)="handleMouseOver('Nota Musical: E4', 'También conocida como Mi')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key F4-key"    (click)="playNote('F4')" (mouseover)="handleMouseOver('Nota Musical: F4', 'También conocida como Fa')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Gb4-key"   (click)="playNote('Gb4')" (mouseover)="handleMouseOver('Nota Musical: F#4 / Gb4', 'También conocida como Fa Sostenido o Sol Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key G4-key"    (click)="playNote('G4')" (mouseover)="handleMouseOver('Nota Musical: G4', 'También conocida como Sol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Ab4-key"   (click)="playNote('Ab4')" (mouseover)="handleMouseOver('Nota Musical: G#4 / Ab4', 'También conocida como Sol Sostenido o La Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key A4-key"    (click)="playNote('A4')" (mouseover)="handleMouseOver('Nota Musical: A4', 'También conocida como La')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Bb4-key"   (click)="playNote('Bb4')" (mouseover)="handleMouseOver('Nota Musical: A#4 / Bb4', 'También conocida como La Sostenido o Si Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key B4-key"    (click)="playNote('B4')" (mouseover)="handleMouseOver('Nota Musical: B4', 'También conocida como Si')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key C5-key"    (click)="playNote('C5')" (mouseover)="handleMouseOver('Nota Musical: C5', 'También conocida como Do')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Db5-key"   (click)="playNote('Db5')" (mouseover)="handleMouseOver('Nota Musical: C#5 / Db5', 'También conocida como Do Sostenido o Re Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key D5-key"    (click)="playNote('D5')" (mouseover)="handleMouseOver('Nota Musical: D5', 'También conocida como Re')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Eb5-key"   (click)="playNote('Eb5')" (mouseover)="handleMouseOver('Nota Musical: D#5 / Eb5', 'También conocida como Re Sostenido o Mi Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key E5-key"    (click)="playNote('E5')" (mouseover)="handleMouseOver('Nota Musical: E5', 'También conocida como Mi')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key F5-key"    (click)="playNote('F5')" (mouseover)="handleMouseOver('Nota Musical: F5', 'También conocida como Fa')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Gb5-key"   (click)="playNote('Gb5')" (mouseover)="handleMouseOver('Nota Musical: F#5 / Gb5', 'También conocida como Fa Sostenido o Sol Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key G5-key"    (click)="playNote('G5')" (mouseover)="handleMouseOver('Nota Musical: G5', 'También conocida como Sol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Ab5-key"   (click)="playNote('Ab5')" (mouseover)="handleMouseOver('Nota Musical: G#5 / Ab5', 'También conocida como Sol Sostenido o La Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key A5-key"    (click)="playNote('A5')" (mouseover)="handleMouseOver('Nota Musical: A5', 'También conocida como La')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="black-key Bb5-key"   (click)="playNote('Bb5')" (mouseover)="handleMouseOver('Nota Musical: A#5 / Bb5', 'También conocida como La Sostenido o Si Bemol')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key B5-key"    (click)="playNote('B5')" (mouseover)="handleMouseOver('Nota Musical: B5', 'También conocida como Si')" (mouseleave)="handleMouseLeave()"></button>
+                                    <button class="white-key C6-key"    (click)="playNote('C6')" (mouseover)="handleMouseOver('Nota Musical: C6', 'También conocida como Do')" (mouseleave)="handleMouseLeave()"></button>
                                 </div>
                             </div>
                         </div>
