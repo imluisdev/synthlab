@@ -17,7 +17,7 @@ const routes: Routes = [
         loadChildren: () => import('./features/registrar/registrar.module').then(m => m.RegistrarModule)
       },
       {
-        path: 'lesson',
+        path: 'teoria-musical',
         loadChildren: () => import('./features/lesson/lesson.module').then(m => m.LessonModule)
       },
       {
@@ -27,6 +27,18 @@ const routes: Routes = [
       {
         path: 'quiz',
         loadChildren: () => import('./features/quiz/quiz.module').then(m => m.QuizModule)
+      },
+      {
+        path: 'sintesis-sonora',
+        loadChildren: () => import('./features/synth-lesson/synth-lesson.module').then(m => m.SynthLessonModule)
+      },
+      {
+        path: 'about',
+        loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule)
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
   }

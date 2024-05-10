@@ -1,26 +1,37 @@
 <nav class="flex h-screen">
     <div class="px-6 w-64 border-r-2 border-gray-300" >
         <img src="assets/img/synthlab.png" class="w-40 py-2">
-        <h2 class="text-base font-bold mb-4 uppercase">Aprender</h2>
+        <h2 class="text-base font-bold mb-4 uppercase">Teoría Musical</h2>
         <ul>
-            <li class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md" routerLink="/quiz">
+            <li (click)="goToTeoriaMusical()" class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
                 <span class="material-symbols-outlined cursor-pointer">piano</span>
-                <span class="px-2">Teoría Musical</span>
+                <span class="text-sm px-2">Aprende Teoría Musical</span>
+            </li>
+            <li (click)="goToQuiz()" class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
+                <span class="material-symbols-outlined cursor-pointer">piano</span>
+                <span class="text-sm px-2">Quiz de Teoría Musical</span>
+            </li>
+        </ul>
+        <h2 class="text-base font-bold mb-4 uppercase">Síntesis Sonora</h2>
+        <ul>
+            <li (click)="goToSintesisSonora()" class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
+                <span class="material-symbols-outlined cursor-pointer">graphic_eq</span>
+                <span class="text-sm px-2">Aprende Síntesis Sonora</span>
             </li>
             <li class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
                 <span class="material-symbols-outlined cursor-pointer">graphic_eq</span>
-                <span class="px-2">Síntesis Sonora</span>
+                <span class="text-sm px-2">Quiz de Síntesis Sonora</span>
+            </li>
+            <li (click)="goToSynth()" class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
+                <span class="material-symbols-outlined cursor-pointer">graphic_eq</span>
+                <span class="text-sm px-2">Experimenta con el Synth</span>
             </li>
         </ul>
-        <h2 class="text-base font-bold mb-4 uppercase">Funcionalidades</h2>
+        <h2 class="text-base font-bold mb-4 uppercase">Experimenta</h2>
         <ul>
             <li class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
                 <span class="material-symbols-outlined cursor-pointer">network_intelligence_update</span>
-                <span class="px-2">Experimenta con IA</span>
-            </li>
-            <li class="flex items-center mb-4 hover:text-orange-500 hover:cursor-pointer p-2 bg-gray-100 rounded-md">
-                <span class="material-symbols-outlined cursor-pointer">electrical_services</span>
-                <span class="px-2">Conecta tu teclado MIDI</span>
+                <span class="text-sm px-2">Experimenta con IA</span>
             </li>
         </ul>
     </div>
