@@ -16,6 +16,14 @@ export class NavbarComponent implements OnInit {
     this.detectRouteChanges();
   }
 
+  public goToHome(){
+    this.router.navigate(['/']);
+  }
+
+  public goToAbout(){
+    this.router.navigate(['/about']);
+  }
+
   public goToRegistrar(){
     this.router.navigate(['/registrar']);
   }
