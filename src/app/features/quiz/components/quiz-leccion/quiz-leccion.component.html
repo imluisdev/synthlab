@@ -7,22 +7,52 @@
             </div>
 
             <div class="px-10 mt-4">
+
+                <div *ngIf="!preguntas">
+                    <div class="mt-6">
+                        <p-skeleton class="mt-32" height="85px" borderRadius="13px"></p-skeleton>
+                    </div>
+                    <div class="mt-6">
+                        <p-skeleton class="mt-32" height="85px" borderRadius="13px"></p-skeleton>
+                    </div>
+                    <div class="mt-6">
+                        <p-skeleton class="mt-32" height="85px" borderRadius="13px"></p-skeleton>
+                    </div>
+                    <div class="mt-6">
+                        <p-skeleton class="mt-32" height="85px" borderRadius="13px"></p-skeleton>
+                    </div>
+                </div>
+
                 <div *ngFor="let pregunta of preguntas; let i = index" class="bg-gray-100 rounded-xl border-l-4 border-orange-600 p-6 mt-6">
                     <mat-accordion>
                         <mat-expansion-panel hideToggle>
     
                             <mat-expansion-panel-header>
                                 <mat-panel-title class="text-base font-semibold">{{ i + 1 }}. {{ pregunta.pregunta }}</mat-panel-title>
-                                <!-- <mat-panel-description>This is a summary of the content</mat-panel-description> -->
+                                <mat-icon *ngIf="selectedOptions[i] && evaluado" class="text-orange-600">{{ selectedOptions[i].es_correcta == 1 ? 'check' : 'close' }}</mat-icon>
                             </mat-expansion-panel-header>
-    
-                            <div *ngFor="let opcion of pregunta.opciones" class="mt-2">
-                                <span>{{ opcion.respuesta }} </span>
-                            </div>
-    
+
+                            <mat-radio-group [disabled]="evaluado" [(ngModel)]="selectedOptions[i]">
+                                <div *ngFor="let opcion of pregunta.opciones; let i = index" class="mt-4">
+                                    <mat-radio-button [value]="opcion">
+                                        <div class="rounded-3xl bg-gray-50 hover:bg-gray-100 px-5 py-2 border-orange-600 border-b-2">
+                                            <span>{{ abecedario[i] }}. {{ opcion.respuesta }}</span>
+                                        </div>
+                                    </mat-radio-button>
+                                </div>
+                            </mat-radio-group>
+
                         </mat-expansion-panel>
                     </mat-accordion>
                 </div>
+
+<!--                 <div>
+                    <mat-spinner color="accent"></mat-spinner>
+                </div> -->
+            </div>
+
+            <div class="flex justify-center mt-14">
+                <button (click)="evaluarLeccion()" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-3xl text-sm w-1/3 py-4 custom-font-500 text-center">Evaluar lección</button>
             </div>
 
         </div>
