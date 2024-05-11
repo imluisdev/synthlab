@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LeccionService } from '../../../../services/leccion.service';
 import { register } from 'swiper/element/bundle';
+import { Router } from '@angular/router';
+import { ILeccion } from '../../../../models/leccion.models';
 register();
 
 @Component({
@@ -19,6 +21,8 @@ export class LessonComponent implements OnInit{
   public descripciones: any;
   public recursos: any;
 
+  constructor(private leccionService: LeccionService, private router: Router){}
+
   public siguienteLeccion(){
     this.numeroLeccion += 1;
     this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
@@ -31,7 +35,11 @@ export class LessonComponent implements OnInit{
     this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
   }
 
-    constructor(private leccionService: LeccionService){}
+  public redirectToQuizLeccion(leccion: ILeccion){
+    const leccionId = leccion.id;
+    this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
+    console.log(leccion);
+  }
 
     ngOnInit(): void {
       this.leccionService.obtenerTitulos({id:1}).subscribe( (resp:any) => {
@@ -47,7 +55,6 @@ export class LessonComponent implements OnInit{
         if(resp.status){
           this.lecciones = resp.results;
           this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
-          console.log(this.descripciones);
         } else{
           console.log("Error");
         }

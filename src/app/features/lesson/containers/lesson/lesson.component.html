@@ -33,7 +33,7 @@
                 <div class="col-span-3">
                     <div class="flex items-center mb-4 text-2xl text-white bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] p-2 rounded-md">
                         <span class="material-symbols-outlined">table_chart_view</span>
-                        <span class="px-2">Lecciones teóricas</span>
+                        <span class="px-2">Lecciones disponibles</span>
                     </div>
                     <div class="flex flex-col mb-4 text-lg text-black bg-gradient-to-r from-[#f5953c] to-[#e43558] p-2 h-80 rounded-md">
                         <div class="bg-white pt-3 px-2 h-80 rounded-md overflow-y-auto">
@@ -50,7 +50,10 @@
                         </div>
                     </div>
                     <div class="flex justify-center">
-                        <button (click)="siguienteLeccion()" class="text-slate-50 block w-max py-2 px-12 rounded-md shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0">
+                        <button (click)="redirectToQuizLeccion(leccion)" class="text-slate-50 block py-2 px-4 mx-2 rounded-md shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558]">
+                            Tomar Quiz
+                        </button>
+                        <button (click)="siguienteLeccion()" class="text-slate-50 block py-2 px-4 mx-2 rounded-md shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558]">
                             Siguiente Lección
                         </button>
                     </div>
