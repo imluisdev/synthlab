@@ -1,9 +1,9 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ILeccion } from '../../../../models/leccion.models';
 import { PreguntaService } from '../../../../services/pregunta.service';
 import { IPreguntasPorLeccionRequest, IPregunta } from '../../../../models/pregunta.models';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-quiz-leccion',
@@ -16,9 +16,13 @@ export class QuizLeccionComponent implements OnInit {
               private preguntaService: PreguntaService) { }
 
   public leccion: ILeccion;
+  public evaluado: boolean = false;
   public preguntas: Array<IPregunta>;
+  public abecedario: Array<string>;
+  public selectedOptions: Array<any> = [];
 
   ngOnInit(): void {
+    this.abecedario = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r'];
     const state: any = this.location.getState();
     this.leccion = state.leccion;
     this.getPreguntasPorLeccion();
@@ -31,6 +35,22 @@ export class QuizLeccionComponent implements OnInit {
         this.preguntas = resp.results;
       }
     });
+  }
+
+  public evaluarLeccion(){
+    if(this.preguntas.length == this.selectedOptions.length){
+      this.evaluado = true;
+    } else {
+      Swal.fire({
+        title: "<h1 class='font-bold'>Respuestas incompletas</h1>",
+        html: `<h1 class='font-semibold mb-5'>Por favor contesta todas las preguntas correspondientes a la lección</h1>`,
+        icon: "warning",
+        showConfirmButton: false
+      });
+    }
+/*     this.selectedOptions.forEach(item => {
+      console.log(item);
+    }); */
   }
 
 }

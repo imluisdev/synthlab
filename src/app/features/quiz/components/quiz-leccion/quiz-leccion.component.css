@@ -1,0 +1,18 @@
+/* ::ng-deep.mdc-radio__background {
+
+} */
+
+::ng-deep.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-disabled-selected-icon-color: black;
+    --mdc-radio-disabled-unselected-icon-color: black;
+    --mdc-radio-unselected-hover-icon-color: #212121;
+    --mdc-radio-unselected-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(0, 0, 0, 0.54);
+    --mdc-radio-selected-focus-icon-color: #EA580C;
+    --mdc-radio-selected-hover-icon-color: #EA580C;
+    --mdc-radio-selected-icon-color: #EA580C;
+    --mdc-radio-selected-pressed-icon-color: #EA580C;
+    --mat-radio-ripple-color: black;
+    --mat-radio-checked-ripple-color: #EA580C;
+    --mat-radio-disabled-label-color: rgba(0, 0, 0, 0.38);
+}
