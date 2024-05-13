@@ -28,7 +28,8 @@ export class QuizComponent implements OnInit {
 
   public redirectToQuizLeccion(leccion: ILeccion){
     const leccionId = leccion.id;
-    this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
+    // this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
+    this.router.navigate([`quiz/${leccionId}`]);
   }
 
 }

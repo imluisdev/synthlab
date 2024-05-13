@@ -1,7 +1,7 @@
 <body class="font-sans">
     <div class="flex fixed h-screen w-full">
         <app-sidebar></app-sidebar>
-        <div class="flex flex-col w-full">
+        <div *ngIf="leccion" class="flex flex-col w-full">
             <div class="flex justify-center mt-8 mb-5">
                 <span class="font-bold text-4xl bg-gradient-to-tr from-[#f5743c] to-[#e43558] text-transparent bg-clip-text">{{ leccion.titulo }}</span>
             </div>
@@ -45,14 +45,12 @@
                         </mat-expansion-panel>
                     </mat-accordion>
                 </div>
-
-<!--                 <div>
-                    <mat-spinner color="accent"></mat-spinner>
-                </div> -->
+                
             </div>
 
             <div class="flex justify-center mt-14">
-                <button (click)="evaluarLeccion()" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-3xl text-sm w-1/3 py-4 custom-font-500 text-center">Evaluar lección</button>
+                <button (click)="evaluarLeccion()" [disabled]="evaluado" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-3xl text-sm w-1/3 py-4 custom-font-500 text-center">Evaluar lección</button>
+                <button (click)="goToNextLesson()" [disabled]="!evaluado" class="text-white bg-gradient-to-br ml-3 disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-3xl text-sm px-5 py-4 text-center"><mat-icon>chevron_right</mat-icon></button>
             </div>
 
         </div>
