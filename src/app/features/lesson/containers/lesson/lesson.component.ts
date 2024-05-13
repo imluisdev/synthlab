@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LeccionService } from '../../../../services/leccion.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { register } from 'swiper/element/bundle';
-import { Router } from '@angular/router';
 import { ILeccion } from '../../../../models/leccion.models';
 register();
 
@@ -21,7 +21,9 @@ export class LessonComponent implements OnInit{
   public descripciones: any;
   public recursos: any;
 
-  constructor(private leccionService: LeccionService, private router: Router){}
+  constructor(private leccionService: LeccionService, private router: Router, private activatedRoute: ActivatedRoute){}
+
+  public currentRoute: string;
 
   public siguienteLeccion(){
     this.numeroLeccion += 1;
@@ -42,6 +44,7 @@ export class LessonComponent implements OnInit{
   }
 
     ngOnInit(): void {
+      this.detectRouteChanges();
       this.leccionService.obtenerTitulos({id:1}).subscribe( (resp:any) => {
         if(resp.status){
           this.titulos = resp.results;
@@ -58,6 +61,16 @@ export class LessonComponent implements OnInit{
         } else{
           console.log("Error");
         }
+      })
+    }
+
+    public goToDashboard(){
+      this.router.navigate(['/dashboard']);
+    }
+
+    public detectRouteChanges(){
+      this.router.events.subscribe((resp: any) => {
+        this.currentRoute = resp.routerEvent?.url;
       })
     }
 }

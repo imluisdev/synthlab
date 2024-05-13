@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-synth-generator',
   templateUrl: './synth.component.html',
   styleUrl: './synth.component.css'
 })
-export class SynthComponent {
+export class SynthComponent implements OnInit{
   osc_unison: number = 0;
   osc_wave: number = 0;
   frequency_filter: number = 70;
@@ -32,7 +33,9 @@ export class SynthComponent {
   hoveredElement: string = '¿Que elementos componen un sintetizador?';
   hoveredElementDescription: string = 'Coloca el mouse sobre un elemento del sintetizador para saber más sobre el';
 
-  constructor() { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+
+  public currentRoute: string;
 
   ngOnInit(): void {
     this.svgElement = document.getElementById('wavePath');
@@ -40,6 +43,17 @@ export class SynthComponent {
     this.svgLFO = document.getElementById('wavePathLFO');
     this.updateWaveLFO();
     this.requestMIDIAccess();
+    this.detectRouteChanges();
+  }
+
+  public goToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
+
+  public detectRouteChanges(){
+    this.router.events.subscribe((resp: any) => {
+      this.currentRoute = resp.routerEvent?.url;
+    })
   }
 
   handleMouseOver(element: string, description: string): void {
