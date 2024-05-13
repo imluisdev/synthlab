@@ -46,6 +46,7 @@ export class SynthLessonComponent implements OnInit{
         if(resp.status){
           this.titulos = resp.results;
           this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
+          console.log(this.titulos);
         } else{
           console.log("Error");
         }
@@ -55,6 +56,7 @@ export class SynthLessonComponent implements OnInit{
         if(resp.status){
           this.lecciones = resp.results;
           this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+          console.log(resp);
         } else{
           console.log("Error");
         }
