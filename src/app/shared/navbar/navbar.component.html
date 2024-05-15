@@ -29,7 +29,7 @@
                     <button class="button  shadow-sm shadow-slate-400/30 hidden py-3 mr-10 bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] lg:block" (click)="goToRegistrar()">Probar SynthLab</button>
                 </nav>
             } @else {
-                <nav class="h-20 flex justify-center items-center shadow-md fixed top-0 left-0 right-0 z-10 bg-white">
+                <nav (click)="goToHome()" class="cursor-pointer h-20 flex justify-center items-center shadow-md fixed top-0 left-0 right-0 z-10 bg-white">
                     <img src="https://firebasestorage.googleapis.com/v0/b/synthlab-src.appspot.com/o/synthlab.png?alt=media&token=8e4f8cbf-150a-4a40-a3a4-fe0d4a7e9467" class="w-56">
                 </nav>
             }
