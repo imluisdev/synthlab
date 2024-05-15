@@ -47,7 +47,7 @@ export class RegistrarComponent implements OnInit {
         icon: "success",
         showConfirmButton: false,
         timer: 2000,
-        didClose: () => this.router.navigate(['/synth'])
+        didClose: () => this.router.navigate(['/dashboard'])
       });
     } else {
       Swal.fire({
@@ -163,7 +163,7 @@ export class RegistrarComponent implements OnInit {
           icon: "success",
           showConfirmButton: false,
           timer: 2000,
-          didClose: () => this.router.navigate(['/'])
+          didClose: () => this.router.navigate(['/dashboard'])
         });
       } else {
         Swal.fire({

@@ -31,4 +31,8 @@ export class QuizComponent implements OnInit {
     this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
   }
 
+  public goToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
+
 }

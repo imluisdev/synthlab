@@ -1,7 +1,12 @@
 <body class="font-sans">
     <div class="flex fixed h-screen w-full">
         <app-sidebar></app-sidebar>
+
         <div class="flex flex-col w-full">
+            <div class="flex items-center pt-4 px-4">
+                <span (click)="goToDashboard()" class="material-symbols-outlined cursor-pointer">arrow_back</span>
+                <span (click)="goToDashboard()" class="text-base bg-clip-text px-2 cursor-pointer">Regresar</span>
+            </div>
             <div class="flex justify-center mt-8 mb-5">
                 <span class="font-bold text-4xl bg-gradient-to-tr from-[#f5743c] to-[#e43558] text-transparent bg-clip-text">Lecciones</span>
             </div>
