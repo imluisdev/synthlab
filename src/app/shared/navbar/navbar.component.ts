@@ -28,6 +28,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/registrar']);
   }
 
+  public goToFeatures(){
+    this.router.navigate(['/features']);
+  }
+
+  public goToDashboard(){
+    this.router.navigate(['/dashboard']);
+  }
+
   public detectRouteChanges(){
     this.router.events.subscribe((resp: any) => {
       this.currentRoute = resp.routerEvent?.url;
