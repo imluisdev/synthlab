@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { ILoginGroup, IRegistrarUsuarioGroup } from '../../../../models/form.models';
-import { IRegistrarUsuario } from '../../../../models/usuario.models';
+import { IRegistrarUsuario, ILoginRequest } from '../../../../models/usuario.models';
 import { UsuarioService } from '../../../../services/usuario.service';
 import { finalize, take, timer } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -21,6 +21,7 @@ export class RegistrarComponent implements OnInit {
   public registrar: boolean = true;
   public login: boolean = false;
   public loading: boolean;
+  public loadingLogin: boolean;
   public hiddenPassword: boolean = true;
   public hiddenConfirmationPassword: boolean = true;
   public hasCapitalLetter: boolean = false;
@@ -40,19 +41,39 @@ export class RegistrarComponent implements OnInit {
 
   public iniciarSesion(e: any){
     e.preventDefault();
+    this.loadingLogin = true;
     if(this.iniciarSesionGroup.valid){
-      Swal.fire({
-        title: "<h1 class='font-bold'>Inicio de sesión exitoso!</h1>",
-        html: `<h1 class='font-semibold mb-5'>Has iniciado sesión de manera correcta</h1>`,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-        didClose: () => this.router.navigate(['/dashboard'])
+      const reqLogin: ILoginRequest = {
+        correo_electronico: this.iniciarSesionGroup.controls['correo_electronico'].value,
+        contrasena: this.iniciarSesionGroup.controls['contrasena'].value
+      };
+      this.usuarioService.iniciarSesion(reqLogin).pipe(
+        finalize(() => this.loadingLogin = false)
+      ).subscribe((resp: any) => {
+        if(resp.status){
+          localStorage.setItem('token', resp.results.token);
+          Swal.fire({
+            title: `<h1 class='font-bold'>${ resp.message }</h1>`,
+            html: `<h1 class='font-semibold mb-5'>Has iniciado sesión de manera correcta</h1>`,
+            icon: "success",
+            showConfirmButton: false,
+            timer: 2000,
+            didClose: () => this.router.navigate(['/dashboard'])
+          });
+        } else {
+          Swal.fire({
+            title: `<h1 class='font-bold'>Error en el inicio de sesión</h1>`,
+            html: `<h1 class='font-semibold mb-5'>${ resp.message }</h1>`,
+            icon: "error",
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
       });
     } else {
       Swal.fire({
-        title: "<h1 class='font-bold'>Error en el inicio de sesión</h1>",
-        html: `<h1 class='font-semibold mb-5'>Alguno de los datos es incorrecto</h1>`,
+        title: `<h1 class='font-bold'>Error en el inicio de sesión</h1>`,
+        html: `<h1 class='font-semibold mb-5'>Favor de ingresar los datos en el formato correcto!</h1>`,
         icon: "error",
         showConfirmButton: false,
         timer: 2000

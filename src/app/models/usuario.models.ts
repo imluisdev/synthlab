@@ -6,3 +6,8 @@ export interface IRegistrarUsuario {
     contrasena: string;
     fecha_nacimiento: string;
 }
+
+export interface ILoginRequest {
+    correo_electronico: string;
+    contrasena: string;
+}

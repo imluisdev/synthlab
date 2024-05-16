@@ -101,7 +101,7 @@
             </div>
 
             <div class="flex justify-center w-full">
-                <button (click)="iniciarSesion($event)" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-lg text-sm w-80 px-8 py-2.5 custom-font-500 text-center">Entrar</button>
+                <button (click)="iniciarSesion($event)" [disabled]="loadingLogin" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-lg text-sm w-80 px-8 py-2.5 custom-font-500 text-center">Entrar</button>
             </div>
         
         </div>

@@ -10,8 +10,10 @@ export class DashboardComponent implements OnInit{
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   public currentRoute: string;
+  public usuario: any;
 
   ngOnInit(): void {
+    this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.detectRouteChanges();
   }
 
