@@ -6,6 +6,8 @@ import { UsuarioService } from '../../../../services/usuario.service';
 import { finalize, take, timer } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AvatarService } from '../../../../services/avatar.service';
+import { IAvatar } from '../../../../models/avatar.models';
 
 @Component({
   selector: 'app-registrar',
@@ -14,12 +16,12 @@ import { Router } from '@angular/router';
 })
 export class RegistrarComponent implements OnInit {
 
-  constructor(private formulario: NonNullableFormBuilder, private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private formulario: NonNullableFormBuilder, private usuarioService: UsuarioService, private router: Router, private avatarService: AvatarService) {}
 
   public registrarUsuarioGroup: FormGroup<IRegistrarUsuarioGroup>;
   public iniciarSesionGroup: FormGroup<ILoginGroup>;
-  public registrar: boolean = true;
-  public login: boolean = false;
+  public registrar: boolean = false;
+  public login: boolean = true;
   public loading: boolean;
   public loadingLogin: boolean;
   public hiddenPassword: boolean = true;
@@ -27,16 +29,25 @@ export class RegistrarComponent implements OnInit {
   public hasCapitalLetter: boolean = false;
   public hasNumber: boolean = false;
   public hasSymbol: boolean = false;
+  public steps: number = 0;
+  public avatares: Array<IAvatar>;
 
   ngOnInit() {
     this.armarFormularioRegistro();
     this.armarFormularioLogin();
+    this.getAvataresDisponibles();
   }
 
   public hola(){
     this.hasCapitalLetter = /[A-Z]/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
     this.hasNumber = /\d/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
     this.hasSymbol = /[^a-zA-Z0-9]/.test(this.registrarUsuarioGroup.controls['contrasena'].value);
+  }
+
+  public getAvataresDisponibles(){
+    this.avatarService.getAvatares().subscribe((resp: any) => {
+      this.avatares = resp.results;
+    });
   }
 
   public iniciarSesion(e: any){
