@@ -1,7 +1,7 @@
 <div class="flex justify-center px-36">
 
     <div class="flex h-[90vh] justify-center items-center">
-        <div class="flex bg-gray-100 rounded-[100px] px-36 py-20 border-y-4 border-orange-500">
+        <div class="flex bg-gray-100 rounded-[100px] px-36 py-20 border-y-[6px] border-orange-500">
             
             <div *ngIf="login && !registrar" class="flex justify-center fade-in-image">
                 <div class="rounded-3xl py-12 md:px-14 px-8 bg-white border-2">
@@ -59,6 +59,10 @@
                                     <input formControlName="apellido_materno" type="text" placeholder="Escribe tu apellido materno..." class="disabled:bg-gray-200 focus:outline-none text-sm rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-orange-500 focus:border-b-orange-500 block custom-font-300 w-full px-5 py-3.5">
                                 </div>
                             </div>
+
+                            <div class="flex justify-center w-full">
+                                <button (click)="nextStepRegister()" [disabled]="this.registrarUsuarioGroup.controls['nombre'].invalid || this.registrarUsuarioGroup.controls['apellido_paterno'].invalid || this.registrarUsuarioGroup.controls['apellido_materno'].invalid" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-full text-sm w-80 px-8 py-1.5 text-center"><mat-icon>chevron_right</mat-icon></button>
+                            </div>
                         </div>
 
                         <div *ngIf="steps == 1" class="fade-in-image">
@@ -85,7 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input (input)="hola()" formControlName="contrasena" [type]="hiddenPassword ? 'password' : 'text'" type="password" placeholder="Escribe tu contraseña..." class="disabled:bg-gray-200 focus:outline-none text-sm rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-orange-500 focus:border-b-orange-500 block custom-font-300 w-full px-5 py-3.5">
+                                <input (input)="checkCorrectPasswordFormat()" formControlName="contrasena" [type]="hiddenPassword ? 'password' : 'text'" type="password" placeholder="Escribe tu contraseña..." class="disabled:bg-gray-200 focus:outline-none text-sm rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-orange-500 focus:border-b-orange-500 block custom-font-300 w-full px-5 py-3.5">
                                 <span class="material-symbols-outlined input-icon" (click)="changePasswordVisibility()">{{ hiddenPassword ? 'visibility_off' : 'visibility' }}</span>
                                 <!-- <span class="custom-font-400 text-orange-500" style="font-size: 12px;">* Asegúrate que ésta contenga al menos una mayúscula, un número y un símbolo especial</span> -->
                             </div>
@@ -95,19 +99,29 @@
                                 <span class="material-symbols-outlined input-icon" (click)="changeConfirmationPasswordVisibility()">{{ hiddenConfirmationPassword ? 'visibility_off' : 'visibility' }}</span>
                                 <!-- <span class="custom-font-400 text-orange-500" style="font-size: 12px;">* Asegúrate que ésta contenga al menos una mayúscula, un número y un símbolo especial</span> -->
                             </div>
+
+                            <div class="flex justify-center w-full">
+                                <button (click)="nextStepRegister()" [disabled]="(this.registrarUsuarioGroup.controls['correo_electronico'].invalid || this.registrarUsuarioGroup.controls['contrasena'].invalid || this.registrarUsuarioGroup.controls['confirmar_contrasena'].invalid) || (!hasCapitalLetter || !hasNumber || !hasSymbol)" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-full text-sm w-80 px-8 py-1.5 text-center"><mat-icon>chevron_right</mat-icon></button>
+                            </div>
                         </div>
 
                         <div *ngIf="steps == 2" class="fade-in-image">
+
                             <div class="mt-8">
                                 <label class="block mb-1 text-sm font-bold text-gray-700 custom-font-500">Fecha de Nacimiento</label>
                                 <input formControlName="fecha_nacimiento" type="date" class="disabled:bg-gray-200 focus:outline-none text-sm rounded-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-orange-500 focus:border-b-orange-500 block custom-font-300 w-full px-5 py-3.5">
                             </div>
 
-                            <label class="block mb-1 text-sm font-bold text-gray-700 custom-font-500 mt-5">Selecciona un avatar</label>
+                            <label class="block mb-1 text-sm font-bold text-gray-700 custom-font-500 mt-3">Selecciona un avatar</label>
                             
-                            <div class="flex justify-between p-4">
-                                <img class="rounded-3xl hover:border-4 hover:border-[#ff6b30]" *ngFor="let avatar of avatares" [src]="avatar.path" width="20%">
+                            <div class="flex justify-between">
+                                <img (click)="selectAvatar(avatar)" class="rounded-3xl hover:border-4 hover:border-[#ff6b30]" [ngClass]="avatar.checked ? 'border-4 border-[#ff6b30]' : ''" *ngFor="let avatar of avatares" [src]="avatar.path" width="20%">
                             </div>
+
+                            <div class="flex justify-center">
+                                <button (click)="nextStepRegister()" [disabled]="loading || (this.registrarUsuarioGroup.controls['fecha_nacimiento'].invalid || !avatarSelected)" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-6 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-full text-sm w-full px-8 py-2.5 text-center custom-font-500">Registrarse</button>
+                            </div>
+
                         </div>
 
                         <!-- <div class="grid grid-cols-4 gap-2 w-full border-2 border-red-500">
@@ -120,9 +134,9 @@
                         </div> -->
                         
             
-                        <div class="flex justify-center w-full">
-                            <button (click)="steps = steps + 1" [disabled]="loadingLogin" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-full text-sm w-80 px-8 py-1.5 text-center"><mat-icon>chevron_right</mat-icon></button>
-                        </div>
+                        <!-- <div class="flex justify-center w-full">
+                            <button (click)="nextStepRegister()" [disabled]="this.registrarUsuarioGroup.controls['nombre'].invalid || this.registrarUsuarioGroup.controls['apellido_paterno'].invalid || this.registrarUsuarioGroup.controls['apellido_materno'].invalid" class="text-white bg-gradient-to-br disabled:from-slate-500 disabled:to-slate-500 disabled:cursor-not-allowed hover:to-[#de0d37] from-[#f5743c] to-[#e43558] mt-10 focus:ring-4 focus:outline-none focus:ring-[#f8d0d0] font-medium rounded-full text-sm w-80 px-8 py-1.5 text-center"><mat-icon>chevron_right</mat-icon></button>
+                        </div> -->
                     
                     </form>
                 </div>

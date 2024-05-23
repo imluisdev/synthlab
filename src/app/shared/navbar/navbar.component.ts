@@ -11,9 +11,11 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   public currentRoute: string;
+  public userData: any;
 
   ngOnInit(): void {
     this.detectRouteChanges();
+    this.userData = JSON.parse(localStorage.getItem('usuario') || '{}');
   }
 
   public goToHome(){
