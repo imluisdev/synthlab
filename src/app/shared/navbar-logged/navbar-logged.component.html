@@ -1,0 +1,16 @@
+<nav class="h-20 flex justify-between px-7 items-center shadow-md fixed top-0 left-0 right-0 z-10 bg-white">
+    <nav></nav>
+    <img (click)="goToHome()" src="https://firebasestorage.googleapis.com/v0/b/synthlab-src.appspot.com/o/synthlab.png?alt=media&token=8e4f8cbf-150a-4a40-a3a4-fe0d4a7e9467" class="w-56 cursor-pointer">
+    <img *ngIf="usuario" [matMenuTriggerFor]="menu" class="transition ease-in-out delay-[35ms] hover:-translate-y-1 flex justify-end rounded-full hover:border-[3px] hover:border-opacity-10 hover:border-black cursor-pointer" [src]="usuario.path_avatar" width="3%">
+    <p-skeleton *ngIf="!usuario" shape="circle" size="3rem" styleClass="mr-2" />
+    <mat-menu #menu="matMenu">
+        <button (click)="goToUserDetail()" mat-menu-item>
+          <mat-icon>manage_accounts</mat-icon>
+          <span>Mi cuenta</span>
+        </button>
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+    </mat-menu>
+</nav>

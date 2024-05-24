@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { ILoginRequest, IRegistrarUsuario } from '../models/usuario.models';
+import { ILoginRequest, ILogoutRequest, IRegistrarUsuario, IUsuarioRequest } from '../models/usuario.models';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,14 @@ export class UsuarioService {
 
   public iniciarSesion(req: ILoginRequest){
     return this.httpService.post('/iniciar_sesion', req);
+  }
+
+  public cerrarSesion(req: ILogoutRequest){
+    return this.httpService.post('/cerrar_sesion', req);
+  }
+
+  public getUsuarioInfo(req: IUsuarioRequest){
+    return this.httpService.post('/usuario', req);
   }
 
 }
