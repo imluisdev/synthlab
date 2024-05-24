@@ -14,6 +14,11 @@ const routes: Routes = [
         pathMatch: 'full'
       },
       {
+        path: 'me',
+        canActivate: [sessionGuard],
+        loadChildren: () => import('./features/me/me.module').then(m => m.MeModule)
+      },
+      {
         path: 'registrar',
         loadChildren: () => import('./features/registrar/registrar.module').then(m => m.RegistrarModule)
       },

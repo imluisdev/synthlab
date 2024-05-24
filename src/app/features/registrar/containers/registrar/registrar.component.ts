@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AvatarService } from '../../../../services/avatar.service';
 import { IAgregarUsuarioAvatarRequest, IAvatar } from '../../../../models/avatar.models';
+import { SharingService } from '../../../../services/sharing.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-registrar',
@@ -19,7 +21,8 @@ export class RegistrarComponent implements OnInit {
   constructor(private formulario: NonNullableFormBuilder,
               private usuarioService: UsuarioService,
               private router: Router,
-              private avatarService: AvatarService) {}
+              private avatarService: AvatarService,
+              private sharingService: SharingService) {}
 
   public registrarUsuarioGroup: FormGroup<IRegistrarUsuarioGroup>;
   public iniciarSesionGroup: FormGroup<ILoginGroup>;
@@ -141,14 +144,18 @@ export class RegistrarComponent implements OnInit {
         finalize(() => this.loadingLogin = false)
       ).subscribe((resp: any) => {
         if(resp.status){
-          localStorage.setItem('token', resp.results.token);
           Swal.fire({
             title: `<h1 class='font-bold'>${ resp.message }</h1>`,
             html: `<h1 class='font-semibold mb-5'>Has iniciado sesión de manera correcta</h1>`,
             icon: "success",
             showConfirmButton: false,
             timer: 2000,
-            didClose: () => this.router.navigate(['/dashboard'])
+            didClose: () => {
+              window.location.href = `${ environment.mainUrl }/dashboard`;
+              // this.router.navigate(['/dashboard']);
+              localStorage.setItem('token', resp.results.token);
+              this.sharingService.saveUser(resp.results);
+            }
           });
         } else {
           Swal.fire({

@@ -34,6 +34,7 @@ export class AuthService {
     const jwtHelper = new JwtHelperService();
     if(jwtHelper.isTokenExpired(sesion.token)){
       localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
       return of(false);
     }
 
