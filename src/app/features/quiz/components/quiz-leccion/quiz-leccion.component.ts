@@ -6,6 +6,7 @@ import { IPreguntasPorLeccionRequest, IPregunta } from '../../../../models/pregu
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LeccionService } from '../../../../services/leccion.service';
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-quiz-leccion',
@@ -92,7 +93,7 @@ export class QuizLeccionComponent implements OnInit {
 
     this.leccionService.obtenerLeccion({ id: nextLessonId }).subscribe((resp: any) => {
       if(resp.status){
-        window.location.href = `http://localhost:4200/quiz/${nextLessonId}`;
+        window.location.href = `${environment.mainUrl}/quiz/${nextLessonId}`;
       } else {
         Swal.fire({
           title: "<h1 class='font-bold'>Error en la petición</h1>",

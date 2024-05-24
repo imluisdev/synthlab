@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { ILogoutRequest } from '../../models/usuario.models';
 import Swal from 'sweetalert2';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-navbar-logged',
@@ -48,7 +49,7 @@ export class NavbarLoggedComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000,
         didClose: () => {
-          window.location.href = 'http://localhost:4200/';
+          window.location.href = `${environment.mainUrl}`;
           this.router.navigate(['/']);
           localStorage.removeItem('token');
           localStorage.removeItem('usuario');
