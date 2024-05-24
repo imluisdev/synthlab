@@ -1,4 +1,4 @@
 export const environment = {
-    mainUrl: 'http://localhost:4200',
-    apiUrl: 'http://synthlab.localhost'
+    mainUrl: 'https://synthlab.io',
+    apiUrl: 'https://api.synthlab.io'
 };
