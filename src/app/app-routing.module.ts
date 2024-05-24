@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { sessionGuard } from './services/guards/session.guard';
+import { sessionActiveGuard } from './services/guards/session-active.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
+        canActivate: [sessionActiveGuard],
         pathMatch: 'full'
       },
       {
@@ -20,6 +22,7 @@ const routes: Routes = [
       },
       {
         path: 'registrar',
+        canActivate: [sessionActiveGuard],
         loadChildren: () => import('./features/registrar/registrar.module').then(m => m.RegistrarModule)
       },
       {
@@ -44,6 +47,7 @@ const routes: Routes = [
       },
       {
         path: 'about',
+        canActivate: [sessionActiveGuard],
         loadChildren: () => import('./features/about/about.module').then(m => m.AboutModule)
       },
       {
@@ -53,6 +57,7 @@ const routes: Routes = [
       },
       {
         path: 'features',
+        canActivate: [sessionActiveGuard],
         loadChildren: () => import('./features/features-section/features-section.module').then(m => m.FeaturesSectionModule)
       }
     ]
