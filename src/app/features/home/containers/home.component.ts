@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,10 @@ export class HomeComponent implements OnInit{
   svgSquare: HTMLElement | null; 
   svgTriangle: any;
 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute){}
+
+  public currentRoute: string;
+
   ngOnInit(): void {
     this.svgSine = document.getElementById('wavePathSine');
     this.svgSquare = document.getElementById('wavePathSquare');
@@ -25,6 +30,16 @@ export class HomeComponent implements OnInit{
     this.updateWaveSine();
     this.updateWaveSquare();
     this.updateWaveTriangle();
+  }
+
+  public goToRegistrar(){
+    this.router.navigate(['/registrar']);
+  }
+
+  public detectRouteChanges(){
+    this.router.events.subscribe((resp: any) => {
+      this.currentRoute = resp.routerEvent?.url;
+    })
   }
 
   calculateWaveSine(x: number): number {

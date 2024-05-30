@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MeRoutingModule } from './me-routing.module';
 import { MeComponent } from './containers/me/me.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { MeComponent } from './containers/me/me.component';
   ],
   imports: [
     CommonModule,
-    MeRoutingModule
+    MeRoutingModule,
+    SkeletonModule,
+    SharedModule
   ]
 })
 export class MeModule { }
