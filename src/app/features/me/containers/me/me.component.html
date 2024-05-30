@@ -1,1 +1,53 @@
-<p>me works!</p>
+<body class="font-sans">
+    <div class="flex fixed h-screen w-full">
+        <app-sidebar></app-sidebar>
+
+        <div class="flex flex-col w-full px-14 py-6">
+            <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] mx-10 mt-4 mb-1 rounded-md overflow-hidden shadow-md">
+                <div class="text-2xl text-white mx-4 mt-4 rounded-md h-10">
+                    <span class="flex justify-center font-bold px-2">Bienvenido a mi perfil</span>
+                </div>
+            </div>
+            <section *ngIf="usuario" class="wrapper grid gap-4 justify-items-center items-center pt-8 pb-12 md:grid-cols-2">
+                <article class="text-center space-y-6">
+                    <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden shadow-md">
+                        <div class="text-2xl text-white mx-4 mt-2 p-2 rounded-md">
+                            <span class="flex justify-start font-bold px-2">Nombre: {{usuario.nombre }}</span>
+                            <p class="flex justify-center px-2 text-lg"></p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden shadow-md">
+                        <div class="text-2xl text-white mx-4 mt-2 p-2 rounded-md">
+                            <span class="flex justify-start font-bold px-2">Apellido: {{usuario.apellido_paterno }} {{usuario.apellido_materno }}</span>
+                            <p class="flex justify-center px-2 text-lg"></p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden shadow-md">
+                        <div class="text-2xl text-white mx-4 mt-2 p-2 rounded-md">
+                            <span class="flex justify-start font-bold px-2">Email: {{usuario.correo_electronico }}</span>
+                            <p class="flex justify-center px-2 text-lg"></p>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] m-1 rounded-md overflow-hidden shadow-md">
+                        <div class="text-2xl text-white mx-4 mt-2 p-2 rounded-md">
+                            <span class="flex justify-start font-bold px-2">Fecha de nacimiento: {{usuario.fecha_nacimiento }}</span>
+                            <p class="flex justify-center px-2 text-lg"></p>
+                        </div>
+                    </div>
+                </article>
+                <div class="flex justify-center rounded-full shadow-md md:order-1" alt="">
+                    <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center m-1 rounded-full overflow-hidden">
+                        <div class="flex rounded-full justify-center">
+                            <img [src]="usuario.path_avatar" class="flex rounded-full h-72">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div *ngIf="!usuario" class="mt-12 flex">
+                <p-skeleton  borderRadius="20px" width="20rem" height="20rem"></p-skeleton>
+                <p-skeleton shape="circle" size="18rem" styleClass="ml-36" />
+            </div>
+            
+        </div>
+    </div>
+</body>
