@@ -6,12 +6,9 @@
         <p>
             Únete para empezar a aprender teoría musical y síntesis de sonido, con métodos de aprendizaje que te ayudarán a comprender los conceptos para que puedas replicarlos en tus creaciones y proyectos musicales.
         </p>
-        <a (click)="goToRegistrar()" class="cursor-pointer button mx-auto shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0 hidden">
-            Comienza ahora
-        </a>
     </article>
 
-    <div class="flex justify-center rounded-xl shadow-md md:order-2 w-full" alt="">
+    <div class="flex justify-center rounded-xl shadow-md md:order-2 w-full">
         <div class="flex bg-gradient-to-r from-[#f5953c] to-[#e43558] items-center h-96 m-1 rounded-md overflow-hidden w-full">
             <div class="flex rounded-md">
                 <div class="grid grid-rows-2 gap-12">
@@ -79,7 +76,7 @@
 </section>
 
 
-<section class="wrapper grid gap-8 justify-items-center items-center py-12 md:grid-cols-2 m-6">
+<section class="wrapper grid gap-8 justify-items-center items-center pt-12 pb-4 md:grid-cols-2 m-6">
     <img src="https://firebasestorage.googleapis.com/v0/b/synthlab-src.appspot.com/o/cable_synth.gif?alt=media&token=8e162001-b2f8-4cbc-8672-9469227b5d07"
     class="w-full max-w-lg rounded-xl border-8 border-slate-900 shadow-md" alt="">
     
@@ -90,9 +87,11 @@
         <p>
             Los usuarios pueden conectar un teclado MIDI a la aplicación para un aprendizaje práctico de síntesis sonora. La aplicación reconocerá las notas tocadas en tiempo real, permitiendo un aprendizaje interactivo al momento de tocar el sintetizador virtual.
         </p>
-        <a (click)="goToRegistrar()" class="cursor-pointer button mx-auto shadow-xl bg-gradient-to-br hover:to-[#de0d37] from-[#f5743c] to-[#e43558] md:mx-0">
-            Quiero probarlo!
-        </a>
+        <div class="block md:hidden">
+            <p class="text-2xl font-bold">
+                Para probar SynthLab inicia sesión en tu computadora.
+            </p>
+        </div>
     </article>
 </section>
 

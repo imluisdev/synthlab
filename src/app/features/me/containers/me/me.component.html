@@ -2,8 +2,10 @@
     <div class="flex fixed h-screen w-full">
         <app-sidebar></app-sidebar>
 
-        <div class="flex flex-col w-full px-2 py-6">
-                <h1 class="text-6xl font-bold text-center py-4">Bienvenido a Mi Perfil</h1>
+        <div class="flex flex-col w-full">
+            <div class="bg-gradient-to-r from-[#f5953c] to-[#e43558] text-white py-6">
+                <h1 class="text-4xl font-bold text-center">Mi Información</h1>
+            </div>
 
             <section *ngIf="usuario" class="wrapper grid gap-40 grid-cols-1 md:grid-cols-2">
                 <article class="space-y-4 mt-8 w-80">
