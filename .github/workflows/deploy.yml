@@ -16,13 +16,16 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18  # Use the Node.js version you need
+          node-version: 18.x  # Use the Node.js version you need
 
       - name: Install Dependencies
         run: npm install
 
       - name: Build Angular Project
         run: npm run build --prod
+
+      - name: Install rsync on GitHub runner
+        run: sudo apt-get install rsync
 
       - name: Setup SSH and Deploy
         run: |
@@ -33,4 +36,4 @@ jobs:
           rsync -avz --delete dist/synthlab/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/synthlab.io/
 
       - name: Restart Apache (if needed)
-        run: ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo '${{ secrets.VPS_SUDO_PASSWORD }}' | sudo -S systemctl restart apache2"
+        run: ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "echo '${{ secrets.VPS_SUDO_PASSWORD }}' | sudo -S systemctl restart apache2 || true"
