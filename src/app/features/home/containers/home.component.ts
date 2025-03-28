@@ -30,6 +30,11 @@ export class HomeComponent implements OnInit{
     this.updateWaveSine();
     this.updateWaveSquare();
     this.updateWaveTriangle();
+
+    fetch("https://synthlab.io:8080/")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Error:", error));
   }
 
   public goToRegistrar(){
