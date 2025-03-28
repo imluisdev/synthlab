@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +19,9 @@ export class HomeComponent implements OnInit{
   svgSine: HTMLElement | null; 
   svgSquare: HTMLElement | null; 
   svgTriangle: any;
+  apiResponse: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute){}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient){}
 
   public currentRoute: string;
 
@@ -30,6 +32,20 @@ export class HomeComponent implements OnInit{
     this.updateWaveSine();
     this.updateWaveSquare();
     this.updateWaveTriangle();
+
+    this.http.get('http://synthlab.io:8080')
+    .subscribe({
+      next: (response) => {
+        console.log('Respuesta de la API:', response);
+        this.apiResponse = response;
+      },
+      error: (error) => {
+        console.error('Error al hacer la petición GET:', error);
+      },
+      complete: () => {
+        console.log('La solicitud GET ha sido completada');
+      }
+    });
   }
 
   public goToRegistrar(){
