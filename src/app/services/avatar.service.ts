@@ -10,7 +10,7 @@ export class AvatarService {
   constructor(private httpService: HttpService) { }
 
   public getAvatares(){
-    return this.httpService.post('/avatares');
+    return this.httpService.get('avatars');
   }
 
   public agregarUsuarioAvatar(req: IAgregarUsuarioAvatarRequest){

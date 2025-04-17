@@ -115,7 +115,7 @@
                             <label class="block mb-1 text-sm font-bold text-gray-700 custom-font-500 mt-3">Selecciona un avatar</label>
                             
                             <div class="flex justify-between">
-                                <img (click)="selectAvatar(avatar)" class="rounded-3xl hover:border-4 hover:border-[#ff6b30]" [ngClass]="avatar.checked ? 'border-4 border-[#ff6b30]' : ''" *ngFor="let avatar of avatares" [src]="avatar.path" width="20%">
+                                <img (click)="selectAvatar(avatar)" class="rounded-3xl hover:border-4 hover:border-[#ff6b30]" [ngClass]="avatar.checked ? 'border-4 border-[#ff6b30]' : ''" *ngFor="let avatar of avatares" [src]="avatar.img" width="20%">
                             </div>
 
                             <div class="flex justify-center">
