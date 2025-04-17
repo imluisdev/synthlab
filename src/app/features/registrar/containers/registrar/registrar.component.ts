@@ -53,9 +53,12 @@ export class RegistrarComponent implements OnInit {
 
   public getAvataresDisponibles(){
     this.avatarService.getAvatares().subscribe((resp: any) => {
-      this.avatares = this.createCheckedProperty(resp.results);
+      if (Array.isArray(resp)) {
+        this.avatares = this.createCheckedProperty(resp);
+      }
     });
   }
+  
 
   public createCheckedProperty(avatares: Array<IAvatar>){
     return avatares.map(avatar => {

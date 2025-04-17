@@ -16,8 +16,9 @@ export class HttpService {
     return this.http.post(requestUrl, body);
   }
 
-  public get(){
-
+  public get(endpoint: string, params?: any) {
+    const requestUrl: string = `${this.apiUrl}${endpoint}`;
+    return this.http.get(requestUrl, { params });
   }
 
 }

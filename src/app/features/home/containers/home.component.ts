@@ -32,20 +32,6 @@ export class HomeComponent implements OnInit{
     this.updateWaveSine();
     this.updateWaveSquare();
     this.updateWaveTriangle();
-
-    this.http.get('http://synthlab.io:8080')
-    .subscribe({
-      next: (response) => {
-        console.log('Respuesta de la API:', response);
-        this.apiResponse = response;
-      },
-      error: (error) => {
-        console.error('Error al hacer la petición GET:', error);
-      },
-      complete: () => {
-        console.log('La solicitud GET ha sido completada');
-      }
-    });
   }
 
   public goToRegistrar(){
