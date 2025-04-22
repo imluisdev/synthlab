@@ -21,8 +21,8 @@ export class UsuarioService {
     return this.httpService.post('/cerrar_sesion', req);
   }
 
-  public getUsuarioInfo(req: IUsuarioRequest){
-    return this.httpService.post('/user', req);
+  public getUsuarioInfo(req: IUsuarioRequest, token: any){
+    return this.httpService.get('/users', req, token);
   }
 
 }

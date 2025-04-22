@@ -15,10 +15,11 @@ export class NavbarLoggedComponent implements OnInit {
   constructor(private router: Router, private usuarioService: UsuarioService){}
   
   public usuario: any;
-  public idUsuario: number;
+  public correo: number;
 
   ngOnInit(): void {
-    this.idUsuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.correo = usuario.sub || null;
     this.getUserInfo();
   }
 
@@ -30,32 +31,29 @@ export class NavbarLoggedComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  public getUserInfo(){
-    this.usuarioService.getUsuarioInfo({ id_usuario: this.idUsuario }).subscribe((resp: any) => {
-      this.usuario = resp.results;
-    });
+  public getUserInfo() {
+    const token = localStorage.getItem('token');
+  
+    this.usuarioService.getUsuarioInfo({ correo: this.correo }, token)
+      .subscribe((resp: any) => {
+        this.usuario = resp;
+      });
   }
 
   public logout(){
-    const user = JSON.parse(localStorage.getItem('usuario') || '{}');
-    const req: ILogoutRequest = {
-      id_usuario: user.id_usuario
-    };
-    this.usuarioService.cerrarSesion(req).subscribe((resp: any) => {
-      Swal.fire({
-        title: `<h1 class='font-bold'>${ resp.message }</h1>`,
-        html: `<h1 class='font-semibold mb-5'>Serás redirigido a la pagina principal de Synthlab!</h1>`,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 2000,
-        didClose: () => {
-          window.location.href = `${environment.mainUrl}`;
-          this.router.navigate(['/']);
-          localStorage.removeItem('token');
-          localStorage.removeItem('usuario');
-        }
-      });
+    Swal.fire({
+      title: `<h1 class='font-bold'>¡Sesión cerrada!</h1>`,
+      html: `<h1 class='font-semibold mb-5'>Serás redirigido a la página principal de Synthlab.</h1>`,
+      icon: "success",
+      showConfirmButton: false,
+      timer: 2000,
+      didClose: () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
+        window.location.href = `${environment.mainUrl}`;
+        this.router.navigate(['/']);
+      }
     });
-  }
+  }  
 
 }

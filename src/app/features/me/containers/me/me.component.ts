@@ -9,25 +9,26 @@ import { IUsuarioRequest } from '../../../../models/usuario.models';
 })
 export class MeComponent implements OnInit {
 
-  public idUsuario: any;
+  public correo: any;
   public usuario: any;
 
   constructor(private usuarioService: UsuarioService){}
 
   ngOnInit(): void {
-    this.idUsuario = JSON.parse(localStorage.getItem('usuario') || '{}').id_usuario;
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.correo = usuario.sub || null;
     this.getUsuarioInfo();
   }
 
   public getUsuarioInfo(){
     const reqUsuario: IUsuarioRequest = {
-      id_usuario: this.idUsuario
+      correo: this.correo
     };
-    this.usuarioService.getUsuarioInfo(reqUsuario).subscribe((resp: any) => {
-      if(resp.status){
-        this.usuario = resp.results;
-      }
-    });
+    const token = localStorage.getItem('token');
+    this.usuarioService.getUsuarioInfo({ correo: this.correo }, token)
+      .subscribe((resp: any) => {
+        this.usuario = resp;
+      });
   }
 
 }

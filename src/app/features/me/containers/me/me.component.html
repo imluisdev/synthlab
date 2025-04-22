@@ -24,13 +24,13 @@
                     <div class="bg-gradient-to-r from-orange-400 to-pink-600 rounded-lg p-1 shadow-lg">
                         <div class="bg-white p-2 rounded-lg shadow-lg">
                             <h2 class="text-xl font-semibold text-gray-800">EMAIL</h2>
-                            <p class="text-lg text-gray-600">{{ usuario.correo_electronico }}</p>
+                            <p class="text-lg text-gray-600">{{ usuario.correo }}</p>
                         </div>
                     </div>
                     <div class="bg-gradient-to-r from-orange-400 to-pink-600 rounded-lg p-1 shadow-lg">
                         <div class="bg-white p-2 rounded-lg shadow-lg">
                             <h2 class="text-xl font-semibold text-gray-800">CUMPLEAÑOS</h2>
-                            <p class="text-lg text-gray-600">{{ usuario.fecha_nacimiento }}</p>
+                            <p class="text-lg text-gray-600">{{ usuario.fecha_nacimiento | date }}</p>
                         </div>
                     </div>
                 </article>
@@ -38,7 +38,7 @@
                 <div class="flex justify-center items-center">
                     <div class="relative">
                         <div class="bg-gradient-to-r from-orange-400 to-pink-600 rounded-full p-1 shadow-lg">
-                            <img [src]="usuario.path_avatar" class="rounded-full h-72 w-72 object-cover">
+                            <img [src]="usuario.img" class="rounded-full h-72 w-72 object-cover">
                         </div>
                         <!--<div class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-md">
                             <button class="text-gray-800 font-bold">Editar</button>

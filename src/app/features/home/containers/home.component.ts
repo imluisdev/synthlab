@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { RunApi } from '../../../models/api.models';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +22,9 @@ export class HomeComponent implements OnInit{
   svgSquare: HTMLElement | null; 
   svgTriangle: any;
   apiResponse: any;
+  
+  apiUrl: string = environment.apiUrl;
+  apiMessage: string;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private http: HttpClient){}
 
@@ -32,6 +37,11 @@ export class HomeComponent implements OnInit{
     this.updateWaveSine();
     this.updateWaveSquare();
     this.updateWaveTriangle();
+    this.http.get<RunApi>(`${this.apiUrl}/`).subscribe(
+      (resp) => {
+        this.apiMessage = resp.message;
+      }
+    );
   }
 
   public goToRegistrar(){

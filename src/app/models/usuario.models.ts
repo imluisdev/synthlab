@@ -8,8 +8,8 @@ export interface IRegistrarUsuario {
 }
 
 export interface ILoginRequest {
-    correo_electronico: string;
-    contrasena: string;
+    correo: string;
+    password: string;
 }
 
 export interface ILogoutRequest {
@@ -17,5 +17,5 @@ export interface ILogoutRequest {
 }
 
 export interface IUsuarioRequest {
-    id_usuario: number;
+    correo: number;
 }

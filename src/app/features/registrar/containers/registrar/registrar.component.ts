@@ -140,30 +140,29 @@ export class RegistrarComponent implements OnInit {
     this.loadingLogin = true;
     if(this.iniciarSesionGroup.valid){
       const reqLogin: ILoginRequest = {
-        correo_electronico: this.iniciarSesionGroup.controls['correo_electronico'].value,
-        contrasena: this.iniciarSesionGroup.controls['contrasena'].value
+        correo: this.iniciarSesionGroup.controls['correo_electronico'].value,
+        password: this.iniciarSesionGroup.controls['contrasena'].value
       };
       this.usuarioService.iniciarSesion(reqLogin).pipe(
         finalize(() => this.loadingLogin = false)
       ).subscribe((resp: any) => {
-        if(resp.status){
+        if(resp.token){
           Swal.fire({
-            title: `<h1 class='font-bold'>${ resp.message }</h1>`,
-            html: `<h1 class='font-semibold mb-5'>Has iniciado sesión de manera correcta</h1>`,
+            title: `<h1 class='font-bold'>Bienvenido a Synthlab!</h1>`,
             icon: "success",
             showConfirmButton: false,
             timer: 2000,
             didClose: () => {
               window.location.href = `${ environment.mainUrl }/dashboard`;
+              //window.location.href = `/dashboard`;
               // this.router.navigate(['/dashboard']);
-              localStorage.setItem('token', resp.results.token);
-              this.sharingService.saveUser(resp.results);
+              localStorage.setItem('token', resp.token);
+              //this.sharingService.saveUser(resp.results);
             }
           });
         } else {
           Swal.fire({
             title: `<h1 class='font-bold'>Error en el inicio de sesión</h1>`,
-            html: `<h1 class='font-semibold mb-5'>${ resp.message }</h1>`,
             icon: "error",
             showConfirmButton: false,
             timer: 2000
@@ -273,7 +272,6 @@ export class RegistrarComponent implements OnInit {
     this.loading = true;
     this.usuarioService.registrarUsuario(req).pipe(
       switchMap((respUsuario: any) => {
-        console.log(respUsuario)
         const req: IAgregarUsuarioAvatarRequest = {
           id_usuario: respUsuario.usuario_id,
           id_avatar: this.avatarSelected.id
@@ -284,11 +282,9 @@ export class RegistrarComponent implements OnInit {
         );
       })
     ).subscribe((resp: any) => {
-      console.log(resp)
       if (resp.respAvatar.avatar.id && resp.respUsuario.usuario_id) {
         Swal.fire({
           title: "<h1 class='font-bold'>Registro exitoso!</h1>",
-          //html: `<h1 class='font-semibold mb-5'>${resp.respUsuario.message}</h1>`,
           icon: "success",
           showConfirmButton: false,
           timer: 2000,
@@ -298,7 +294,6 @@ export class RegistrarComponent implements OnInit {
         this.loading = false;
         Swal.fire({
           title: "<h1 class='font-bold'>Error al realizar el registro</h1>",
-          //html: `<h1 class='font-semibold mb-5'>${resp.message}</h1>`,
           icon: "error",
           showConfirmButton: false,
           timer: 2000
