@@ -10,11 +10,11 @@ export class UsuarioService {
   constructor(private httpService: HttpService) { }
 
   public registrarUsuario(req: IRegistrarUsuario){
-    return this.httpService.post('/registrar_usuario', req);
+    return this.httpService.post('/auth/register', req);
   }
 
   public iniciarSesion(req: ILoginRequest){
-    return this.httpService.post('/iniciar_sesion', req);
+    return this.httpService.post('/auth/login', req);
   }
 
   public cerrarSesion(req: ILogoutRequest){
@@ -22,7 +22,7 @@ export class UsuarioService {
   }
 
   public getUsuarioInfo(req: IUsuarioRequest){
-    return this.httpService.post('/usuario', req);
+    return this.httpService.post('/user', req);
   }
 
 }

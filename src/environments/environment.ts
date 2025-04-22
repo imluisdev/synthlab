@@ -1,4 +1,4 @@
 export const environment = {
     mainUrl: 'https://synthlab.io',
-    apiUrl: 'https://render-synthlab.onrender.com/'
+    apiUrl: 'http://localhost:8080'
 };
