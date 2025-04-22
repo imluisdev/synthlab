@@ -11,9 +11,11 @@ export class DashboardComponent implements OnInit{
 
   public currentRoute: string;
   public usuario: any;
+  public correo: string;
 
   ngOnInit(): void {
-    this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.correo = usuario.sub || null;
     this.detectRouteChanges();
   }
 

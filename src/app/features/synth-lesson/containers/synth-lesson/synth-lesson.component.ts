@@ -24,46 +24,42 @@ export class SynthLessonComponent implements OnInit{
   constructor(private leccionService: LeccionService, private router: Router, private activatedRoute: ActivatedRoute){}
 
   public currentRoute: string;
-
+  
+  ngOnInit(): void {
+    this.leccionService.obtenerLeccion({id:1}).subscribe( (resp:any) => {
+        this.lecciones = resp;
+        this.leccion = this.lecciones.find((l: { id: number; }) => l.id === this.numeroLeccion);
+        this.descripciones = this.leccion?.contenidos || [];
+    })
+  }
+  
   public siguienteLeccion(){
     this.numeroLeccion += 1;
-    this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
-    this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
-  }
+    
+    const siguienteLeccion = this.lecciones.find((l: { id: number; }) => l.id === this.numeroLeccion);
+    
+    if (siguienteLeccion) {
+        this.leccion = siguienteLeccion;
+        this.descripciones = this.leccion?.contenidos || [];
+    } else {
+      //Regresarlo a la primera lección
+      this.numeroLeccion = 1;
+      this.leccion = this.lecciones.find((l: { id: number; }) => l.id === this.numeroLeccion);
+      this.descripciones = this.leccion?.contenidos || [];
+    }
+}
 
-  public cambiarLeccion(id: any){
+  public cambiarLeccion(id: number){
     this.numeroLeccion = id;
-    this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
-    this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
+    this.leccion = this.lecciones.find((l: { id: number; }) => l.id === this.numeroLeccion);
+    this.descripciones = this.leccion?.contenidos || [];
   }
 
   public redirectToQuizLeccion(leccion: ILeccion){
     const leccionId = leccion.id;
     this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
-    console.log(leccion);
   }
 
-    ngOnInit(): void {
-      this.leccionService.obtenerTemas({id:1}).subscribe( (resp:any) => {
-        if(resp.status){
-          this.titulos = resp.results;
-          this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
-          console.log(this.titulos);
-        } else{
-          console.log("Error");
-        }
-      })
-      
-      this.leccionService.obtenerDescripciones({id:1}).subscribe( (resp:any) => {
-        if(resp.status){
-          this.lecciones = resp.results;
-          this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
-          console.log(resp);
-        } else{
-          console.log("Error");
-        }
-      })
-    }
 
     public goToDashboard(){
       this.router.navigate(['/dashboard']);

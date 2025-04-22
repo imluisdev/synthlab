@@ -40,7 +40,6 @@ export class LessonComponent implements OnInit{
   public redirectToQuizLeccion(leccion: ILeccion){
     const leccionId = leccion.id;
     this.router.navigate([`quiz/${leccionId}`], { state: { leccion } });
-    console.log(leccion);
   }
 
     ngOnInit(): void {
@@ -49,8 +48,6 @@ export class LessonComponent implements OnInit{
         if(resp.status){
           this.titulos = resp.results;
           this.leccion = this.titulos.filter((item:any) => item.id === this.numeroLeccion);
-        } else{
-          console.log("Error");
         }
       })
       
@@ -58,8 +55,6 @@ export class LessonComponent implements OnInit{
         if(resp.status){
           this.lecciones = resp.results;
           this.descripciones = this.lecciones.filter((item:any) => item.id_leccion === this.numeroLeccion);
-        } else{
-          console.log("Error");
         }
       })
     }

@@ -10,7 +10,7 @@ export class LeccionService {
   constructor(private httpService: HttpService) { }
 
   public obtenerLeccion(req: ILeccionRequest){
-    return this.httpService.post('/leccion', req);
+    return this.httpService.get('/lecciones', req);
   }
 
   public obtenerTitulos(req: ILeccionRequest){
