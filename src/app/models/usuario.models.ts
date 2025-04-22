@@ -1,10 +1,10 @@
 export interface IRegistrarUsuario {
     nombre: string;
-    apellido_paterno: string;
-    apellido_materno: string;
-    correo_electronico: string;
-    contrasena: string;
-    fecha_nacimiento: string;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    correo: string;
+    password: string;
+    fechaNacimiento: string;
 }
 
 export interface ILoginRequest {

@@ -93,11 +93,11 @@ export class RegistrarComponent implements OnInit {
   public completeUserRegistration(){
     const req: IRegistrarUsuario = {
       nombre: this.registrarUsuarioGroup.controls['nombre'].value,
-      apellido_paterno: this.registrarUsuarioGroup.controls['apellido_paterno'].value,
-      apellido_materno: this.registrarUsuarioGroup.controls['apellido_materno'].value,
-      correo_electronico: this.registrarUsuarioGroup.controls['correo_electronico'].value,
-      contrasena: this.registrarUsuarioGroup.controls['contrasena'].value,
-      fecha_nacimiento: this.registrarUsuarioGroup.controls['fecha_nacimiento'].value,
+      apellidoPaterno: this.registrarUsuarioGroup.controls['apellido_paterno'].value,
+      apellidoMaterno: this.registrarUsuarioGroup.controls['apellido_materno'].value,
+      correo: this.registrarUsuarioGroup.controls['correo_electronico'].value,
+      password: this.registrarUsuarioGroup.controls['contrasena'].value,
+      fechaNacimiento: this.registrarUsuarioGroup.controls['fecha_nacimiento'].value,
     };
     this.peticionRegistrarUsuarioYAvatar(req);
   }
@@ -218,11 +218,11 @@ export class RegistrarComponent implements OnInit {
       if(password == confirmationPassword){
         const req: IRegistrarUsuario = {
           nombre: this.registrarUsuarioGroup.controls['nombre'].value,
-          apellido_paterno: this.registrarUsuarioGroup.controls['apellido_paterno'].value,
-          apellido_materno: this.registrarUsuarioGroup.controls['apellido_materno'].value,
-          correo_electronico: this.registrarUsuarioGroup.controls['correo_electronico'].value,
-          contrasena: this.registrarUsuarioGroup.controls['contrasena'].value,
-          fecha_nacimiento: this.registrarUsuarioGroup.controls['fecha_nacimiento'].value,
+          apellidoPaterno: this.registrarUsuarioGroup.controls['apellido_paterno'].value,
+          apellidoMaterno: this.registrarUsuarioGroup.controls['apellido_materno'].value,
+          correo: this.registrarUsuarioGroup.controls['correo_electronico'].value,
+          password: this.registrarUsuarioGroup.controls['contrasena'].value,
+          fechaNacimiento: this.registrarUsuarioGroup.controls['fecha_nacimiento'].value,
         };
         this.peticionRegistrarUsuarioYAvatar(req);
       } else {
@@ -269,24 +269,26 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public peticionRegistrarUsuarioYAvatar(req: IRegistrarUsuario){
+  public peticionRegistrarUsuarioYAvatar(req: IRegistrarUsuario) {
     this.loading = true;
-    // this.registrarUsuarioGroup.disable(); // Para desactivar los inputs
     this.usuarioService.registrarUsuario(req).pipe(
       switchMap((respUsuario: any) => {
+        console.log(respUsuario)
         const req: IAgregarUsuarioAvatarRequest = {
-          id_usuario: respUsuario.results,
+          id_usuario: respUsuario.usuario_id,
           id_avatar: this.avatarSelected.id
-        }
+        };
+        // Enviar la solicitud con el cuerpo JSON
         return this.avatarService.agregarUsuarioAvatar(req).pipe(
           map(respAvatar => ({ respUsuario, respAvatar }))
         );
       })
     ).subscribe((resp: any) => {
-      if(resp.respAvatar.status && resp.respUsuario.status){
+      console.log(resp)
+      if (resp.respAvatar.avatar.id && resp.respUsuario.usuario_id) {
         Swal.fire({
           title: "<h1 class='font-bold'>Registro exitoso!</h1>",
-          html: `<h1 class='font-semibold mb-5'>${ resp.respUsuario.message }</h1>`,
+          //html: `<h1 class='font-semibold mb-5'>${resp.respUsuario.message}</h1>`,
           icon: "success",
           showConfirmButton: false,
           timer: 2000,
@@ -296,7 +298,7 @@ export class RegistrarComponent implements OnInit {
         this.loading = false;
         Swal.fire({
           title: "<h1 class='font-bold'>Error al realizar el registro</h1>",
-          html: `<h1 class='font-semibold mb-5'>${ resp.message }</h1>`,
+          //html: `<h1 class='font-semibold mb-5'>${resp.message}</h1>`,
           icon: "error",
           showConfirmButton: false,
           timer: 2000
@@ -304,5 +306,6 @@ export class RegistrarComponent implements OnInit {
       }
     });
   }
+  
 
 }

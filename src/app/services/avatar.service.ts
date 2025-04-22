@@ -10,11 +10,11 @@ export class AvatarService {
   constructor(private httpService: HttpService) { }
 
   public getAvatares(){
-    return this.httpService.get('avatars');
+    return this.httpService.get('/avatars');
   }
 
   public agregarUsuarioAvatar(req: IAgregarUsuarioAvatarRequest){
-    return this.httpService.post('/agregar_usuario_avatar', req);
+    return this.httpService.post('/usuario-avatar/agregar', req);
   }
 
 }
