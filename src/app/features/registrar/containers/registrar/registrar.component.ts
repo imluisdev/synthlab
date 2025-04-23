@@ -153,9 +153,9 @@ export class RegistrarComponent implements OnInit {
             showConfirmButton: false,
             timer: 2000,
             didClose: () => {
-              window.location.href = `${ environment.mainUrl }/dashboard`;
-              //window.location.href = `/dashboard`;
-              // this.router.navigate(['/dashboard']);
+              //window.location.href = `${ environment.mainUrl }/dashboard`;
+              window.location.href = '/';
+              //this.router.navigate(['/dashboard']);
               localStorage.setItem('token', resp.token);
               //this.sharingService.saveUser(resp.results);
             }
